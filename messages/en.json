@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "industries": "Industries",
+    "work": "Work",
+    "insights": "Insights",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "primaryNavigation": "Primary",
+    "footerNavigation": "Footer"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
+  },
+  "logo": {
+    "homeLabel": "GIA — Digital Marketing Advisory, home"
+  },
+  "language": {
+    "switchTo": "العربية",
+    "label": "Language"
+  },
+  "cta": {
+    "startConversation": "Start a Conversation",
+    "exploreServices": "Explore Our Services",
+    "whatsappUs": "WhatsApp Us",
+    "buildGrowthSystem": "Build Your Growth System"
+  },
+  "contactForm": {
+    "name": "Name",
+    "company": "Company",
+    "email": "Email",
+    "phone": "WhatsApp / Phone",
+    "industry": "Industry",
+    "service": "Service Needed",
+    "message": "Message",
+    "consent": "I agree to the Privacy Policy",
+    "privacyPolicyLink": "Read our Privacy Policy",
+    "submit": "Send Inquiry",
+    "submitting": "Sending...",
+    "successTitle": "Thank you.",
+    "successBody": "We've received your message and will be in touch shortly.",
+    "errorTitle": "Something didn't go through.",
+    "errorBody": "Please check the form and try again, or reach us directly on WhatsApp.",
+    "required": "This field is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "consentRequired": "Please agree to the Privacy Policy to continue.",
+    "selectServicePlaceholder": "Select a service",
+    "selectIndustryPlaceholder": "Select an industry",
+    "otherOption": "Other"
+  },
+  "work": {
+    "comingSoonTitle": "More Projects Coming Soon",
+    "comingSoonBody": "We're building our public case study library. Get in touch to discuss reference work relevant to your industry."
+  },
+  "insights": {
+    "comingSoonTitle": "New Articles Coming Soon",
+    "comingSoonBody": "We're preparing our first set of articles on marketing strategy, lead generation, CRM, and growth. Check back soon."
+  },
+  "common": {
+    "core": "Core",
+    "breadcrumbLabel": "Breadcrumb"
+  },
+  "servicePage": {
+    "contextHeading": "The Business Challenge",
+    "approachHeading": "How GIA Approaches This",
+    "capabilitiesHeading": "What This Covers",
+    "outcomesHeading": "What This Helps You Achieve",
+    "ctaBody": "Tell us about your business and we'll talk through how this fits."
+  },
+  "insightsPage": {
+    "byLabel": "By",
+    "updatedLabel": "Updated",
+    "backToInsights": "Back to Insights"
+  },
+  "legalPage": {
+    "lastUpdatedLabel": "Last updated"
+  },
+  "industries": {
+    "andMore": "And More"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has moved.",
+    "back": "Back to Home"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "body": "An unexpected error occurred. Please try again.",
+    "retry": "Try again"
+  }
+}

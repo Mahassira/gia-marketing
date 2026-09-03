@@ -1,0 +1,22 @@
+[
+  {
+    "key": "strategy",
+    "title": "Strategy",
+    "description": "Understanding the business, the market, and the objective before recommending a single channel or tactic."
+  },
+  {
+    "key": "marketing",
+    "title": "Marketing",
+    "description": "Digital, social, and performance marketing built to serve the strategy — not the other way around."
+  },
+  {
+    "key": "growth",
+    "title": "Growth",
+    "description": "Turning marketing activity into qualified leads, managed relationships, and conversion."
+  },
+  {
+    "key": "creative",
+    "title": "Creative",
+    "description": "Branding and content that carry the strategy through to how the business is actually seen."
+  }
+]

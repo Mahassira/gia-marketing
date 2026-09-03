@@ -1,0 +1,13 @@
+{
+  "headline": "Different Businesses. Different Challenges.",
+  "intro": "We don't believe effective marketing starts with a fixed industry formula. It starts with understanding the business.",
+  "openEnded": true,
+  "items": [
+    { "slug": "hospitality", "title": "Hospitality", "blurb": "Marketing systems built around guest acquisition and booking journeys." },
+    { "slug": "restaurants-fnb", "title": "Restaurants & F&B", "blurb": "Demand generation and customer experience for food and beverage businesses." },
+    { "slug": "healthcare", "title": "Healthcare", "blurb": "Patient acquisition and trust-building marketing for healthcare providers." },
+    { "slug": "professional-services", "title": "Professional Services", "blurb": "Lead generation and positioning for firms selling expertise and trust." },
+    { "slug": "retail-ecommerce", "title": "Retail & E-commerce", "blurb": "Customer acquisition and conversion systems across online and offline retail." },
+    { "slug": "technology-startups", "title": "Technology & Startups", "blurb": "Growth marketing and lead generation for early- and growth-stage companies." }
+  ]
+}

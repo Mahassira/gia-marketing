@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "label": "GIA — DIGITAL MARKETING ADVISORY",
+    "headline": "We Start With The Business.",
+    "intro": "GIA is a digital marketing advisory, not a traditional agency. We work from a simple premise: better marketing starts with better decisions, and better decisions start with understanding the business itself — its objectives, its market, and its customers — before recommending a single channel or tactic."
+  },
+  "pillars": [
+    {
+      "title": "Business-First Thinking",
+      "description": "We begin every engagement by understanding the business, not by pitching a predefined package of services. The objective comes first; the channels and tactics are chosen to serve it."
+    },
+    {
+      "title": "Strategy Before Execution",
+      "description": "A marketing strategy should be able to explain why a channel is being used, not just that it is. We build that reasoning first, then execute against it — across digital marketing, social media, and performance marketing."
+    },
+    {
+      "title": "Connected Marketing",
+      "description": "Lead generation, CRM, and conversion are not separate workstreams bolted onto a campaign. We treat them as one connected system, so a generated lead has somewhere clear to go and a defined process for follow-up."
+    },
+    {
+      "title": "Sustainable Growth",
+      "description": "We're focused on growth that compounds — built on measurement, learning, and continuous improvement — rather than a single campaign spike that doesn't hold."
+    }
+  ],
+  "closing": {
+    "headline": "Let's Talk About Your Business.",
+    "body": "If you'd like to talk through where your business is today, where you want it to go, and what you're trying to solve, we're glad to start with the conversation.",
+    "cta": "Start a Conversation"
+  }
+}

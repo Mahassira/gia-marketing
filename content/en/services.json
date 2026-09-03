@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "marketing-strategy",
+    "pillar": "strategy",
+    "title": "Marketing Strategy",
+    "summary": "A clear marketing direction built from your business objectives, not a template.",
+    "intro": "A marketing strategy sets the direction for everything else — which channels to use, in what order, and why. Without it, marketing activity tends to happen in isolated bursts rather than building toward anything.",
+    "context": "Many businesses come to us already running ads, posting on social media, or working with freelancers — but without a clear sense of how those pieces fit together, or which one should come first. Activity is happening, but it isn't compounding.",
+    "approach": "We start by understanding your business objectives, your market, and your customers, then build a strategy that sequences channels and tactics around what needs to happen next — not around a fixed package of services.",
+    "capabilities": ["Business and market assessment", "Customer and competitor analysis", "Channel prioritization and sequencing", "Marketing roadmap and budget allocation"],
+    "outcomes": ["A clear rationale for where marketing budget goes and why", "A sequenced plan rather than a list of disconnected tactics", "A shared reference point for marketing decisions going forward"],
+    "seo": {
+      "title": "Marketing Strategy | GIA Digital Marketing Advisory",
+      "description": "Business-first marketing strategy for companies in Egypt — built from objectives and customers, not a fixed channel list."
+    }
+  },
+  {
+    "slug": "growth-strategy",
+    "pillar": "strategy",
+    "title": "Growth Strategy",
+    "summary": "A plan for sustainable growth that connects marketing to the rest of the business.",
+    "intro": "Growth strategy looks beyond any single campaign or channel, to how marketing, lead management, and customer relationships work together over time.",
+    "context": "A business can run a successful campaign and still not grow sustainably if there's no system connecting that campaign to leads, follow-up, and repeat business. Growth strategy addresses that connection directly.",
+    "approach": "We map how your current marketing, sales, and customer processes connect — and where they don't — then design a growth plan that closes the gaps, rather than adding more activity on top of a disconnected system.",
+    "capabilities": ["Growth model and funnel mapping", "Customer lifecycle analysis", "Cross-functional alignment between marketing and sales", "Growth roadmap with prioritized initiatives"],
+    "outcomes": ["A growth plan grounded in your actual customer journey, not a generic funnel", "Clearer visibility into where opportunities are being lost", "A prioritized set of initiatives rather than a long unranked list"],
+    "seo": {
+      "title": "Growth Strategy | GIA Digital Marketing Advisory",
+      "description": "Growth strategy that connects marketing, lead management, and customer relationships into one system."
+    }
+  },
+  {
+    "slug": "business-advisory",
+    "pillar": "strategy",
+    "title": "Business Advisory",
+    "summary": "Business-first thinking applied before any marketing recommendation is made.",
+    "intro": "Before recommending any marketing approach, it's worth asking a more basic question: what does this business actually need right now?",
+    "context": "Marketing recommendations are sometimes made before the underlying business question is fully understood, leading to activity that's well executed but aimed at the wrong target.",
+    "approach": "We bring a business-first lens to the conversation — understanding your objectives, constraints, and definition of success before any marketing recommendation is made, so the marketing that follows is solving the right problem.",
+    "capabilities": ["Business objective clarification", "Constraint and resource assessment", "Prioritization between competing business goals", "Advisory input ahead of marketing planning"],
+    "outcomes": ["Marketing recommendations grounded in real business priorities", "Fewer false starts from solving the wrong problem well", "A clearer basis for deciding what to do first"],
+    "seo": {
+      "title": "Business Advisory | GIA Digital Marketing Advisory",
+      "description": "Business advisory that grounds marketing decisions in real business objectives."
+    }
+  },
+  {
+    "slug": "digital-marketing",
+    "pillar": "marketing",
+    "title": "Digital Marketing",
+    "summary": "Digital marketing built to serve a strategy, across the channels that fit the business.",
+    "intro": "Digital marketing covers the channels most businesses think of first — but which ones actually matter depends entirely on where your customers are.",
+    "context": "It's common to see budget spread across every available channel by default, rather than concentrated on the ones a specific business's customers actually use.",
+    "approach": "We plan and run digital marketing activity that connects back to your strategy, choosing channels based on where your customers are rather than defaulting to whatever is trending.",
+    "capabilities": ["Channel selection and planning", "Campaign setup and management", "Landing page and funnel alignment", "Performance tracking and reporting"],
+    "outcomes": ["Marketing spend concentrated on the channels that matter for your customers", "Digital activity that connects to a stated strategy, not run in isolation", "Ongoing visibility into what's working"],
+    "seo": {
+      "title": "Digital Marketing | GIA Digital Marketing Advisory",
+      "description": "Strategy-led digital marketing for businesses in Egypt."
+    }
+  },
+  {
+    "slug": "social-media-marketing",
+    "pillar": "marketing",
+    "title": "Social Media Marketing",
+    "summary": "Social media used with intent, as one part of a wider marketing system.",
+    "intro": "Social media can build awareness, support engagement, or generate leads — but it works best when it's clear which of those it's meant to be doing.",
+    "context": "Social media accounts are sometimes run as a standalone activity, disconnected from the rest of a business's marketing and without a clear purpose beyond staying active.",
+    "approach": "We plan social media as part of the wider strategy — deciding what role it plays for your specific business, then producing and managing content against that purpose.",
+    "capabilities": ["Platform strategy and content planning", "Community management", "Paid social campaigns where relevant", "Performance review against a stated purpose"],
+    "outcomes": ["Social media with a clear job to do, not activity for its own sake", "Content that supports the same message as the rest of your marketing", "A realistic cadence your team or ours can actually sustain"],
+    "seo": {
+      "title": "Social Media Marketing | GIA Digital Marketing Advisory",
+      "description": "Social media marketing connected to strategy and lead generation, not run in isolation."
+    }
+  },
+  {
+    "slug": "performance-marketing",
+    "pillar": "marketing",
+    "title": "Performance Marketing",
+    "summary": "Paid marketing measured against the business outcomes that actually matter.",
+    "intro": "Performance marketing is paid activity measured against outcomes that matter to the business, not against vanity metrics.",
+    "context": "It's easy to optimize a paid campaign toward clicks or impressions while losing sight of whether it's actually producing leads or revenue.",
+    "approach": "We build performance campaigns around clear objectives from the outset, and track them against metrics that connect back to leads and business outcomes, not just platform-reported engagement.",
+    "capabilities": ["Campaign objective-setting and structure", "Audience targeting and testing", "Budget management across platforms", "Reporting tied to business outcomes"],
+    "outcomes": ["Paid campaigns judged by business impact, not platform vanity metrics", "Clearer sense of what spend is actually producing", "Faster identification of what to stop, and what to scale"],
+    "seo": {
+      "title": "Performance Marketing | GIA Digital Marketing Advisory",
+      "description": "Performance marketing measured against real business outcomes."
+    }
+  },
+  {
+    "slug": "lead-generation",
+    "pillar": "growth",
+    "title": "Lead Generation",
+    "summary": "Turning marketing activity into a consistent flow of qualified leads.",
+    "intro": "Lead generation is only useful if the leads it produces are usable — reachable, relevant, and ready to be followed up on.",
+    "context": "Marketing can generate plenty of form submissions or inquiries that go nowhere, because there's no clear process for capturing, qualifying, or following up on them.",
+    "approach": "We design lead generation systems that connect marketing channels to a defined capture and qualification process, so leads arrive somewhere with a clear next step, not into a spreadsheet no one checks.",
+    "capabilities": ["Lead capture design across channels", "Qualification criteria and scoring", "Handoff process to follow-up or sales", "Lead volume and quality tracking"],
+    "outcomes": ["Leads that are usable, not just counted", "A defined process for what happens after someone shows interest", "Better visibility into where leads are coming from and how they convert"],
+    "seo": {
+      "title": "Lead Generation | GIA Digital Marketing Advisory",
+      "description": "Lead generation systems built to produce qualified, usable leads."
+    }
+  },
+  {
+    "slug": "conversion-optimization",
+    "pillar": "growth",
+    "title": "Conversion Optimization",
+    "summary": "Improving what happens after the click, not just the click itself.",
+    "intro": "Conversion optimization looks at what happens after someone shows interest — the website, the follow-up, and the steps in between.",
+    "context": "A lot of marketing effort goes into getting someone's attention, and comparatively little into what happens in the moments right after, which is often where the opportunity is actually lost.",
+    "approach": "We review the full path from interest to decision — website experience, forms, follow-up timing and content — and identify where prospects are dropping off, then address those specific points.",
+    "capabilities": ["Conversion path and drop-off analysis", "Website and landing page review", "Follow-up process and messaging review", "Testing of specific changes"],
+    "outcomes": ["A clearer picture of where interest is being lost", "Practical, specific fixes rather than a generic redesign", "A more complete path from interest to decision"],
+    "seo": {
+      "title": "Conversion Optimization | GIA Digital Marketing Advisory",
+      "description": "Conversion optimization focused on the full journey from interest to decision."
+    }
+  },
+  {
+    "slug": "crm-marketing-automation",
+    "pillar": "growth",
+    "title": "CRM & Marketing Automation",
+    "summary": "Connecting marketing to the systems that manage leads and customer relationships.",
+    "intro": "A CRM and marketing automation setup is what keeps leads from depending on someone remembering to follow up.",
+    "context": "Without a system in place, lead follow-up often depends on individual memory and manual effort, which works until volume increases or someone's on leave.",
+    "approach": "We help businesses put the CRM and automation in place to capture, qualify, and follow up on leads consistently, matched to the size and complexity the business actually needs, not an enterprise system for a five-person team.",
+    "capabilities": ["CRM selection and setup guidance", "Lead capture and routing automation", "Follow-up sequence design", "Reporting and pipeline visibility"],
+    "outcomes": ["Leads followed up on consistently, not dependent on memory", "Clearer visibility into where each lead stands", "A system sized to the business, not over-built"],
+    "seo": {
+      "title": "CRM & Marketing Automation | GIA Digital Marketing Advisory",
+      "description": "CRM and marketing automation that keeps leads from falling through the cracks."
+    }
+  },
+  {
+    "slug": "branding",
+    "pillar": "creative",
+    "title": "Branding",
+    "summary": "A brand identity that reflects the strategy behind the business.",
+    "intro": "A brand identity should communicate the strategy behind the business, not just look good on its own.",
+    "context": "Branding work is sometimes treated as a purely visual exercise, disconnected from how the business is actually positioned in its market.",
+    "approach": "We ground branding work in the business strategy and positioning already established, so the identity says the right thing to the right audience rather than simply looking current.",
+    "capabilities": ["Positioning and messaging input", "Visual identity direction", "Brand guidelines for consistent use", "Application across marketing materials"],
+    "outcomes": ["A brand identity that reflects an actual strategic position", "Consistency across the materials your business uses", "A visual identity your team can apply without guesswork"],
+    "seo": {
+      "title": "Branding | GIA Digital Marketing Advisory",
+      "description": "Branding grounded in business strategy and positioning."
+    }
+  },
+  {
+    "slug": "content",
+    "pillar": "creative",
+    "title": "Content",
+    "summary": "Content built to support the strategy, the channels, and the customer journey.",
+    "intro": "Content works best when it's built around what the business needs to say at each stage of the customer journey, not produced on a schedule for its own sake.",
+    "context": "It's common to see content calendars filled to maintain a cadence, without a clear link to what a prospective customer actually needs to know at that point in their decision.",
+    "approach": "We plan content around the customer journey and the questions a prospect actually has at each stage, so each piece has a job to do rather than existing to fill a slot.",
+    "capabilities": ["Content planning tied to the customer journey", "Written and visual content production", "SEO-aware content structure", "Content performance review"],
+    "outcomes": ["Content that serves a specific stage of the customer's decision", "Less content produced for its own sake", "A content plan that's easier to sustain because it has a clear purpose"],
+    "seo": {
+      "title": "Content | GIA Digital Marketing Advisory",
+      "description": "Content planned around the customer journey and business strategy."
+    }
+  },
+  {
+    "slug": "creative-campaigns",
+    "pillar": "creative",
+    "title": "Creative Campaigns",
+    "summary": "Campaign creative built around a clear strategic objective.",
+    "intro": "A creative campaign should exist to serve a specific marketing objective, not the other way around.",
+    "context": "Creative work can be memorable and still miss the point, if the idea isn't connected back to what the campaign is actually meant to achieve.",
+    "approach": "We develop campaign creative to support a defined objective, keeping the creative idea connected to the strategy it's meant to serve throughout production.",
+    "capabilities": ["Campaign concept development", "Creative production across formats", "Alignment with campaign objectives and audience", "Post-campaign review"],
+    "outcomes": ["Creative that serves a specific, stated objective", "A clearer line between the campaign idea and the result it's meant to produce", "Campaign learnings that inform what comes next"],
+    "seo": {
+      "title": "Creative Campaigns | GIA Digital Marketing Advisory",
+      "description": "Creative campaigns built around clear strategic objectives."
+    }
+  }
+]

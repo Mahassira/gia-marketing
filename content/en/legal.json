@@ -1,0 +1,72 @@
+{
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "2026-09-01",
+    "intro": "This Privacy Policy explains what information GIA — Digital Marketing Advisory collects through this website, how it is used, and the choices available to you. It applies to gia.marketing and does not cover third-party sites we may link to.",
+    "sections": [
+      {
+        "heading": "Information We Collect",
+        "body": "When you submit our contact form, we collect the information you provide: your name, company, email address, WhatsApp/phone number, industry, the service you're inquiring about, and your message. We also collect standard analytics data about how visitors use this site, such as pages viewed and general location at a country or city level, through Google Analytics 4."
+      },
+      {
+        "heading": "How We Use This Information",
+        "body": "We use contact form submissions to respond to your inquiry and follow up about the services you asked about. We use analytics data in aggregate to understand how the website is used and to improve it. We do not sell your personal information to third parties."
+      },
+      {
+        "heading": "Cookies & Analytics",
+        "body": "This site uses cookies associated with Google Analytics 4 to measure site usage. You can control or disable cookies through your browser settings; doing so may affect how well some parts of the site perform, though the site will remain usable."
+      },
+      {
+        "heading": "Data Sharing",
+        "body": "We do not share the information you submit with third parties except where necessary to operate the website (for example, email delivery for contact form notifications) or where required by law."
+      },
+      {
+        "heading": "Data Retention",
+        "body": "We retain contact form submissions for as long as reasonably necessary to respond to your inquiry and maintain business records, after which we take reasonable steps to delete or anonymize the information."
+      },
+      {
+        "heading": "Your Rights",
+        "body": "You may contact us at any time to ask what information we hold about you, to request a correction, or to request that we delete it. We will respond to reasonable requests within a reasonable timeframe."
+      },
+      {
+        "heading": "Contact Us",
+        "body": "If you have questions about this Privacy Policy or how your information is handled, please reach out to us through the contact page or WhatsApp link on this site."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "lastUpdated": "2026-09-01",
+    "intro": "These Terms & Conditions govern your use of gia.marketing, operated by GIA — Digital Marketing Advisory. By using this website, you agree to these terms.",
+    "sections": [
+      {
+        "heading": "Use of This Website",
+        "body": "This website is provided for informational purposes, to describe our services, and to allow prospective clients to get in touch with us. You agree to use it only for lawful purposes and not to submit false or misleading information through the contact form."
+      },
+      {
+        "heading": "Intellectual Property",
+        "body": "The content on this website — including text, the GIA logo, and visual design — belongs to GIA — Digital Marketing Advisory unless otherwise noted, and may not be reproduced without permission."
+      },
+      {
+        "heading": "No Guaranteed Results",
+        "body": "Descriptions of our services on this website reflect our approach and capabilities. They are not a guarantee of specific marketing outcomes, results, or timelines, which depend on many factors specific to each business and are addressed individually once an engagement begins."
+      },
+      {
+        "heading": "Limitation of Liability",
+        "body": "This website and its content are provided as-is. To the fullest extent permitted by law, GIA is not liable for any indirect or consequential loss arising from your use of this website."
+      },
+      {
+        "heading": "Changes to These Terms",
+        "body": "We may update these terms from time to time. The date at the top of this page reflects the most recent revision."
+      },
+      {
+        "heading": "Governing Law",
+        "body": "These terms are governed by the laws of Egypt, without regard to conflict-of-law principles."
+      },
+      {
+        "heading": "Contact Us",
+        "body": "Questions about these terms can be sent through the contact page or WhatsApp link on this site."
+      }
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "hero": {
+    "label": "GIA — DIGITAL MARKETING ADVISORY",
+    "headline": "Better Marketing Starts With Better Decisions.",
+    "supportingText": "We help businesses turn marketing into a connected system — from strategy and customer acquisition to lead management, conversion, and growth.",
+    "primaryCta": "Start a Conversation",
+    "secondaryCta": "Explore Our Services",
+    "flow": ["Strategy", "Marketing", "Leads", "CRM", "Conversion", "Growth"]
+  },
+  "intro": {
+    "headline": "Marketing Should Work As A System.",
+    "body": [
+      "Marketing is more than content, campaigns, or advertising.",
+      "Your strategy, marketing channels, lead generation, customer relationships, and conversion process should work together.",
+      "GIA brings these areas together to help businesses make better decisions, build stronger marketing systems, and create sustainable growth."
+    ],
+    "highlight": "Strategy. Marketing. Growth. Creative."
+  },
+  "approach": {
+    "headline": "We Don't Start With A Channel. We Start With The Business.",
+    "intro": "We first understand business objectives, market, customers, challenges, and opportunities before recommending a single channel or tactic.",
+    "steps": [
+      { "number": "01", "title": "Understand", "description": "We start by understanding your business, market, and customers before anything else." },
+      { "number": "02", "title": "Strategize", "description": "We translate that understanding into a clear marketing and growth strategy." },
+      { "number": "03", "title": "Execute", "description": "We bring the strategy to life across the right channels and systems." },
+      { "number": "04", "title": "Measure", "description": "We track performance against the objectives that matter to your business." },
+      { "number": "05", "title": "Grow", "description": "We use what we learn to refine the approach and compound results over time." }
+    ]
+  },
+  "servicesSection": {
+    "headline": "What We Do",
+    "intro": "We bring together the strategic, marketing, growth, and creative capabilities businesses need to move forward."
+  },
+  "growthSystem": {
+    "headline": "Marketing Shouldn't Stop At The Lead.",
+    "body": [
+      "Generating a lead is only the beginning.",
+      "The real opportunity comes from what happens next.",
+      "GIA helps businesses connect marketing with the systems needed to capture, qualify, manage, follow up, and convert opportunities."
+    ],
+    "journey": ["Reach", "Capture", "Qualify", "Manage", "Follow Up", "Convert", "Grow"],
+    "cta": "Build Your Growth System"
+  },
+  "whyGia": {
+    "headline": "A More Connected Way To Grow.",
+    "principles": [
+      { "title": "Business First", "description": "We start with your business objectives, not a predefined package of services." },
+      { "title": "Strategy + Execution", "description": "We connect strategic thinking with practical marketing and implementation." },
+      { "title": "Connected Systems", "description": "Marketing, lead generation, CRM, customer journeys, and conversion should work together." },
+      { "title": "Measurable Thinking", "description": "We focus on performance, learning, and continuous improvement." }
+    ]
+  },
+  "industriesSection": {
+    "headline": "Different Businesses. Different Challenges.",
+    "intro": "We don't believe effective marketing starts with a fixed industry formula. It starts with understanding the business."
+  },
+  "workSection": {
+    "headline": "Selected Work"
+  },
+  "insightsSection": {
+    "headline": "Ideas For Better Marketing."
+  },
+  "finalCta": {
+    "headline": "Let's Talk About Your Business.",
+    "body": "Tell us where your business is today, where you want to go, and what you're trying to solve. We'll start with the conversation.",
+    "primaryCta": "Start a Conversation",
+    "secondaryCta": "WhatsApp Us"
+  }
+}

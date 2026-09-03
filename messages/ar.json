@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "services": "خدماتنا",
+    "industries": "القطاعات",
+    "work": "أعمالنا",
+    "insights": "أفكار ومقالات",
+    "contact": "تواصل معنا",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "primaryNavigation": "التنقل الرئيسي",
+    "footerNavigation": "روابط التذييل"
+  },
+  "a11y": {
+    "skipToContent": "الانتقال إلى المحتوى الرئيسي"
+  },
+  "footer": {
+    "rights": "جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "الشروط والأحكام"
+  },
+  "logo": {
+    "homeLabel": "جيا للاستشارات التسويقية الرقمية، الصفحة الرئيسية"
+  },
+  "language": {
+    "switchTo": "English",
+    "label": "اللغة"
+  },
+  "cta": {
+    "startConversation": "ابدأ الحوار",
+    "exploreServices": "استكشف خدماتنا",
+    "whatsappUs": "تواصل عبر واتساب",
+    "buildGrowthSystem": "ابنِ منظومة نموّك"
+  },
+  "contactForm": {
+    "name": "الاسم",
+    "company": "الشركة",
+    "email": "البريد الإلكتروني",
+    "phone": "واتساب / رقم الهاتف",
+    "industry": "القطاع",
+    "service": "الخدمة المطلوبة",
+    "message": "الرسالة",
+    "consent": "أوافق على سياسة الخصوصية",
+    "privacyPolicyLink": "اطّلع على سياسة الخصوصية",
+    "submit": "إرسال الطلب",
+    "submitting": "جارٍ الإرسال...",
+    "successTitle": "شكرًا لتواصلكم.",
+    "successBody": "تم استلام رسالتكم وسنتواصل معكم في أقرب وقت.",
+    "errorTitle": "لم تُرسَل الرسالة.",
+    "errorBody": "يرجى مراجعة البيانات والمحاولة مجددًا، أو التواصل معنا مباشرة عبر واتساب.",
+    "required": "هذا الحقل مطلوب.",
+    "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح.",
+    "consentRequired": "يرجى الموافقة على سياسة الخصوصية للمتابعة.",
+    "selectServicePlaceholder": "اختر خدمة",
+    "selectIndustryPlaceholder": "اختر قطاعًا",
+    "otherOption": "أخرى"
+  },
+  "work": {
+    "comingSoonTitle": "أعمال جديدة قريبًا",
+    "comingSoonBody": "نعمل حاليًا على إعداد مكتبة دراسات الحالة الخاصة بنا. تواصلوا معنا لمعرفة أعمال مرجعية ذات صلة بقطاعكم."
+  },
+  "insights": {
+    "comingSoonTitle": "مقالات جديدة قريبًا",
+    "comingSoonBody": "نعمل على إعداد أولى مقالاتنا حول استراتيجية التسويق، وتوليد العملاء المحتملين، وإدارة علاقات العملاء، والنمو. تابعونا قريبًا."
+  },
+  "common": {
+    "core": "أساسية",
+    "breadcrumbLabel": "مسار التنقل"
+  },
+  "servicePage": {
+    "contextHeading": "التحدي الذي يواجه العمل",
+    "approachHeading": "كيف تتعامل جيا مع هذا",
+    "capabilitiesHeading": "ما تشمله هذه الخدمة",
+    "outcomesHeading": "ما الذي يساعدك على تحقيقه",
+    "ctaBody": "أخبرونا عن عملكم وسنتحدث عن كيفية ملاءمة هذا له."
+  },
+  "insightsPage": {
+    "byLabel": "بقلم",
+    "updatedLabel": "آخر تحديث",
+    "backToInsights": "العودة إلى أفكار ومقالات"
+  },
+  "legalPage": {
+    "lastUpdatedLabel": "آخر تحديث"
+  },
+  "industries": {
+    "andMore": "والمزيد"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "body": "الصفحة التي تبحثون عنها غير موجودة أو تم نقلها.",
+    "back": "العودة إلى الرئيسية"
+  },
+  "error": {
+    "title": "حدث خطأ ما",
+    "body": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+    "retry": "إعادة المحاولة"
+  }
+}

@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-gold: #edbc23;
+  --color-ink: #000000;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f7f7f5;
+  --color-muted: #555555;
+  --color-border: #e6e6e3;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent iOS Safari from auto-inflating text size in landscape,
+     which can throw off the deliberate mobile-first type scale. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html,
+body {
+  /* Belt-and-braces guard against horizontal scroll: nothing in this
+     layout should ever need to exceed 100% width, but a stray long
+     unbroken string (a URL, a long slug) should never be able to
+     force a horizontal scrollbar on mobile. */
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  color: var(--color-ink);
+  background: var(--color-surface);
+  /* Removes the gray tap-highlight flash on mobile Safari/Chrome so
+     custom :active/hover states aren't fought by the browser default. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Long words (URLs, long Arabic compounds, long slugs) wrap instead of
+   overflowing their container on narrow screens. */
+p,
+h1,
+h2,
+h3,
+h4,
+span,
+a {
+  overflow-wrap: break-word;
+}
+
+/* Visible keyboard focus everywhere — never suppressed */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* RTL: logical properties are used throughout components instead of
+   left/right utilities, so no directional overrides are needed here. */
