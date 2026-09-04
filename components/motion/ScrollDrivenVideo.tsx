@@ -22,6 +22,7 @@ interface ScrollDrivenVideoProps {
    * the original, standalone behavior.
    */
   progress?: MotionValue<number>;
+  reduceMotion?: boolean | null;
 }
 
 /**
@@ -36,12 +37,9 @@ interface ScrollDrivenVideoProps {
  *   internally) but only actually applied to the <video> when it has
  *   moved enough to matter (see MIN_DELTA_SECONDS below) — this is the
  *   "prevent excessive seeking" requirement.
- * - Mobile: scroll-scrubbing video is CPU/GPU-costly on mobile devices
- *   and unreliable on several mobile browsers' seek implementations.
- *   Rather than force desktop behavior onto mobile, this component
- *   detects a narrow viewport (matchMedia) and falls back to the
- *   static poster image outright on mobile — no scrubbing pipeline
- *   runs at all there.
+ * - The component itself is viewport-agnostic. The homepage chooses
+ *   the appropriate desktop/mobile experience, so this component can
+ *   be safely reused wherever scroll scrubbing is desired.
  * - Reduced motion: same fallback — poster image only, no scrubbing,
  *   no autoplay.
  * - Browsers that can't scrub efficiently / slow network: the poster
@@ -54,11 +52,13 @@ export function ScrollDrivenVideo({
   poster,
   className = "",
   progress: externalProgress,
+  reduceMotion: reduceMotionProp,
 }: ScrollDrivenVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const lastAppliedTime = useRef(0);
-  const shouldReduceMotion = useReducedMotion();
+  const reducedMotionHook = useReducedMotion();
+  const shouldReduceMotion = reduceMotionProp ?? reducedMotionHook;
   const [canScrub, setCanScrub] = useState(false);
 
   const MIN_DELTA_SECONDS = 1 / 30; // don't re-seek for sub-frame-scale changes
@@ -73,9 +73,6 @@ export function ScrollDrivenVideo({
 
   useEffect(() => {
     if (shouldReduceMotion) return;
-    const isNarrowViewport = window.matchMedia("(max-width: 767px)").matches;
-    if (isNarrowViewport) return; // mobile: poster only, no scrub pipeline
-
     const video = videoRef.current;
     if (!video) return;
 
@@ -84,10 +81,26 @@ export function ScrollDrivenVideo({
       // without stalling on most connections.
       if (video && video.readyState >= 2) setCanScrub(true);
     }
+    video.addEventListener("loadedmetadata", handleCanScrub);
     video.addEventListener("loadeddata", handleCanScrub);
+    video.addEventListener("canplay", handleCanScrub);
     handleCanScrub();
-    return () => video.removeEventListener("loadeddata", handleCanScrub);
+    return () => {
+      video.removeEventListener("loadedmetadata", handleCanScrub);
+      video.removeEventListener("loadeddata", handleCanScrub);
+      video.removeEventListener("canplay", handleCanScrub);
+    };
   }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    if (!canScrub || shouldReduceMotion) return;
+    const video = videoRef.current;
+    if (!video || !video.duration) return;
+    const latest = progress.get();
+    const targetTime = latest * video.duration;
+    video.currentTime = targetTime;
+    lastAppliedTime.current = targetTime;
+  }, [canScrub, progress, shouldReduceMotion]);
 
   useMotionValueEvent(progress, "change", (latest) => {
     if (!canScrub || shouldReduceMotion) return;
@@ -115,9 +128,9 @@ export function ScrollDrivenVideo({
           poster={poster}
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
-          className={`absolute inset-0 h-full w-full object-cover ${canScrub ? "" : "hidden"}`}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${canScrub ? "opacity-100" : "opacity-0"}`}
         />
       )}
     </div>

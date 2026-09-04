@@ -1,5 +1,3 @@
-"use client";
-
 import { StaggerFlowContainer, StaggerFlowItem } from "@/components/motion/StaggerFlow";
 import { ScrollStageTracker } from "@/components/motion/ScrollStageTracker";
 import { FlowNode, FlowChevron } from "./FlowNode";
@@ -11,18 +9,6 @@ import { FlowNode, FlowChevron } from "./FlowNode";
  * two most important diagrams on the page read as one continuous system
  * rather than two different visual treatments. Same staggered reveal on
  * scroll, same reduced-motion handling (see components/motion/StaggerFlow.tsx).
- *
- * This is a Client Component (added in the Netlify build fix) because it
- * passes a render-prop function as children to ScrollStageTracker (also
- * client) for the active-stage-on-scroll behavior — passing a function as
- * a prop from a Server Component to a Client Component isn't allowed in
- * Next.js (functions aren't serializable across that boundary), so the
- * parent of a client render-prop pattern must itself be a client
- * component. GrowthSystemSection (its caller) remains a Server Component
- * unaffected by this — Server Components can render Client Components as
- * ordinary children without issue; the restriction is specifically about
- * passing a *function* as a prop across that boundary. This exactly
- * mirrors the same already-correct pattern in ApproachSteps.tsx.
  *
  * Mobile: numbered nodes stack vertically with a connecting line on the
  * start edge — RTL-safe via logical properties (border-s/ps- rather than
