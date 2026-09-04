@@ -1,13 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, type MotionValue } from "framer-motion";
 import { ScrollDrivenVideo } from "@/components/motion/ScrollDrivenVideo";
 
 const DESKTOP_VIDEO = "/media/gia-cinematic-desktop.mp4";
@@ -15,14 +9,25 @@ const DESKTOP_POSTER = "/media/gia-cinematic-desktop-poster.jpg";
 const MOBILE_VIDEO = "/media/gia-cinematic-mobile.mp4";
 const MOBILE_POSTER = "/media/gia-cinematic-mobile-poster.jpg";
 
-/**
- * GIA's cinematic brand moment.
- *
- * The important design decision here is spatial: the six stages are one
- * timeline, not six dark screens. The page stays light outside a single
- * contained cinematic panel, while the panel remains sticky long enough
- * for scroll to drive the supplied video through its 6-stage story.
- */
+const stageDescriptions = {
+  en: [
+    "Understand the business before choosing the channel.",
+    "Connect the right channels to a clear strategy.",
+    "Turn attention into qualified opportunities.",
+    "Capture and manage every opportunity systematically.",
+    "Improve the journey from opportunity to customer.",
+    "Build a stronger foundation for sustainable growth.",
+  ],
+  ar: [
+    "فهم العمل قبل اختيار القناة.",
+    "ربط القنوات المناسبة باستراتيجية واضحة.",
+    "تحويل الاهتمام إلى فرص مؤهلة.",
+    "التقاط كل فرصة وإدارتها بطريقة منهجية.",
+    "تحسين الرحلة من الفرصة إلى العميل.",
+    "بناء أساس أقوى لنمو مستدام.",
+  ],
+} as const;
+
 export function CinematicSystemSection({
   stages,
   arabic,
@@ -31,250 +36,197 @@ export function CinematicSystemSection({
   arabic: boolean;
 }) {
   return (
-    <section className="bg-surface py-10 sm:py-14 lg:py-20" aria-labelledby="gia-cinematic-heading">
-      <h2 id="gia-cinematic-heading" className="sr-only">
-        {arabic ? "منهج جيا للنمو" : "The GIA growth journey"}
-      </h2>
-      <ol className="sr-only">
-        {stages.map((stage) => (
-          <li key={stage}>{stage}</li>
-        ))}
-      </ol>
-      <DesktopCinematic stages={stages} arabic={arabic} />
-      <MobileCinematic stages={stages} arabic={arabic} />
+    <section className="bg-surface py-16 sm:py-20 lg:py-28" aria-labelledby="gia-cinematic-heading">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="mb-8 flex items-end justify-between gap-8 lg:mb-12">
+          <div className={arabic ? "text-right" : "text-left"} dir={arabic ? "rtl" : "ltr"}>
+            <p className="font-heading text-[10px] uppercase tracking-[0.28em] text-gold">
+              GIA / DIGITAL MARKETING ADVISORY
+            </p>
+            <h2 id="gia-cinematic-heading" className={`mt-3 max-w-3xl text-2xl font-semibold tracking-[-0.035em] text-ink sm:text-3xl lg:text-4xl ${arabic ? "font-heading-ar" : "font-heading"}`}>
+              {arabic ? "من الاستراتيجية إلى النمو — كنظام واحد مترابط." : "From strategy to growth — as one connected system."}
+            </h2>
+          </div>
+          <p className="hidden max-w-xs text-right text-xs leading-5 text-muted lg:block" dir={arabic ? "rtl" : "ltr"}>
+            {arabic ? "مرّر لاكتشاف كيف تتصل كل مرحلة بالتي تليها." : "Scroll to see how each stage connects to the next."}
+          </p>
+        </div>
+
+        <DesktopExperience stages={stages} arabic={arabic} />
+        <MobileExperience stages={stages} arabic={arabic} />
+      </div>
     </section>
   );
 }
 
-function DesktopCinematic({
-  stages,
-  arabic,
-}: {
-  stages: string[];
-  arabic: boolean;
-}) {
+function DesktopExperience({ stages, arabic }: { stages: string[]; arabic: boolean }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const activeIndex = useActiveStage(scrollYProgress, stages.length);
+  const descriptions = arabic ? stageDescriptions.ar : stageDescriptions.en;
 
   return (
-    <div ref={sectionRef} className="relative mx-auto hidden max-w-7xl lg:block lg:h-[132vh] px-6 xl:px-8">
-      <div className="sticky top-20 flex h-[min(78vh,820px)] min-h-[560px] overflow-hidden rounded-[8px] bg-ink shadow-[0_24px_80px_rgba(0,0,0,0.14)]">
-        <div className="relative min-w-0 flex-1 overflow-hidden">
-          <ScrollDrivenVideo
-            src={DESKTOP_VIDEO}
-            poster={DESKTOP_POSTER}
-            progress={scrollYProgress}
-            className="absolute inset-0"
-            reduceMotion={reduceMotion}
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/55 via-ink/10 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink/45 to-transparent" />
+    <div ref={sectionRef} className="relative hidden lg:block">
+      <div className="relative min-h-[145vh]">
+        <div className="sticky top-20 grid min-h-[72vh] grid-cols-[minmax(260px,0.72fr)_minmax(0,1.55fr)] items-center gap-12 xl:gap-16">
+          <div className={arabic ? "order-2 text-right" : "order-1 text-left"} dir={arabic ? "rtl" : "ltr"}>
+            <div className="mb-8 flex items-center gap-4">
+              <span className="h-px w-10 bg-gold" />
+              <span className="font-heading text-[10px] uppercase tracking-[0.25em] text-muted">
+                {arabic ? "رحلة النمو" : "Growth journey"}
+              </span>
+            </div>
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-7 px-7 sm:px-10">
-            <div className="flex items-end justify-between gap-6 text-surface">
-              <div>
-                <p className="mb-2 font-heading text-[10px] uppercase tracking-[0.28em] text-gold">
-                  GIA / DIGITAL MARKETING ADVISORY
-                </p>
-                <p className={`text-sm text-surface/75 sm:text-base ${arabic ? "font-heading-ar" : "font-body"}`}>
-                  {arabic ? "من الاستراتيجية إلى النمو — كنظام واحد." : "From strategy to growth — as one connected system."}
-                </p>
+            <div className="space-y-0">
+              {stages.map((stage, index) => {
+                const active = index === activeIndex;
+                return (
+                  <div
+                    key={`${stage}-${index}`}
+                    className={`relative border-b border-border py-4 transition-all duration-300 ${active ? "opacity-100" : "opacity-45"}`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className={`mt-1 shrink-0 font-heading text-[10px] tracking-[0.18em] ${active ? "text-gold" : "text-muted"}`}>
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="min-w-0">
+                        <p className={`text-xl font-semibold tracking-[-0.025em] ${active ? "text-ink" : "text-ink/70"} ${arabic ? "font-heading-ar" : "font-heading"}`}>
+                          {stage}
+                        </p>
+                        <motion.p
+                          initial={false}
+                          animate={{ height: active ? "auto" : 0, opacity: active ? 1 : 0, marginTop: active ? 6 : 0 }}
+                          className={`overflow-hidden text-xs leading-5 text-muted ${arabic ? "font-heading-ar" : "font-body"}`}
+                        >
+                          {descriptions[index]}
+                        </motion.p>
+                      </div>
+                    </div>
+                    <motion.div
+                      initial={false}
+                      animate={{ scaleX: active ? 1 : 0 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.35 }}
+                      style={{ transformOrigin: arabic ? "right" : "left" }}
+                      className="absolute bottom-[-1px] h-px w-16 bg-gold"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-7 flex items-center justify-between text-[9px] uppercase tracking-[0.2em] text-muted">
+              <span>{String(activeIndex + 1).padStart(2, "0")} / {String(stages.length).padStart(2, "0")}</span>
+              <span>{arabic ? "مرّر للأسفل" : "Keep scrolling"}</span>
+            </div>
+          </div>
+
+          <div className={arabic ? "order-1" : "order-2"}>
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[12px] bg-ink shadow-[0_28px_80px_rgba(0,0,0,0.13)]">
+              <ScrollDrivenVideo
+                src={DESKTOP_VIDEO}
+                poster={DESKTOP_POSTER}
+                progress={scrollYProgress}
+                className="absolute inset-0"
+                reduceMotion={reduceMotion}
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-5 sm:p-7" dir={arabic ? "rtl" : "ltr"}>
+                <span className="font-heading text-[9px] uppercase tracking-[0.24em] text-white/65">GIA</span>
+                <span className="font-heading text-[9px] tracking-[0.2em] text-white/60">{String(activeIndex + 1).padStart(2, "0")}</span>
               </div>
-              <ProgressLine progress={scrollYProgress} rtl={arabic} />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-7" dir={arabic ? "rtl" : "ltr"}>
+                <motion.p
+                  key={activeIndex}
+                  initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.3 }}
+                  className={`text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl ${arabic ? "font-heading-ar" : "font-heading"}`}
+                >
+                  {stages[activeIndex]}
+                </motion.p>
+              </div>
             </div>
           </div>
         </div>
-
-        <StageRail stages={stages} progress={scrollYProgress} arabic={arabic} />
       </div>
     </div>
   );
 }
 
-function StageRail({
-  stages,
-  progress,
-  arabic,
-}: {
-  stages: string[];
-  progress: MotionValue<number>;
-  arabic: boolean;
-}) {
-  return (
-    <aside
-      dir={arabic ? "rtl" : "ltr"}
-      className="relative flex w-[250px] shrink-0 flex-col justify-center border-s border-surface/10 bg-ink px-7 xl:w-[290px] xl:px-9"
-      aria-label={arabic ? "مراحل رحلة النمو" : "Growth journey stages"}
-    >
-      <div className="mb-10">
-        <p className="font-heading text-[10px] uppercase tracking-[0.28em] text-gold">
-          {arabic ? "رحلة النمو" : "Growth journey"}
-        </p>
-        <p className={`mt-3 text-sm leading-6 text-surface/55 ${arabic ? "font-heading-ar" : "font-body"}`}>
-          {arabic ? "كل مرحلة تبني ما بعدها." : "Each stage builds on the next."}
-        </p>
-      </div>
-
-      <div className="relative">
-        <div className="absolute start-[5px] top-2 bottom-2 w-px bg-surface/10" />
-        <div className="space-y-5">
-          {stages.map((stage, index) => (
-            <StageRailItem
-              key={stage}
-              label={stage}
-              index={index}
-              count={stages.length}
-              progress={progress}
-              arabic={arabic}
-            />
-          ))}
-        </div>
-      </div>
-    </aside>
-  );
-}
-
-function StageRailItem({
-  label,
-  index,
-  count,
-  progress,
-  arabic,
-}: {
-  label: string;
-  index: number;
-  count: number;
-  progress: MotionValue<number>;
-  arabic: boolean;
-}) {
-  const segment = 1 / count;
-  const start = index * segment;
-  const end = index === count - 1 ? 1 : (index + 1) * segment;
-  const center = start + segment / 2;
-  const distance = segment * 0.42;
-
-  const opacity = useTransform(
-    progress,
-    [Math.max(0, center - distance), center, Math.min(1, center + distance)],
-    [0.38, 1, 0.38],
-  );
-  const scale = useTransform(
-    progress,
-    [Math.max(0, center - distance), center, Math.min(1, center + distance)],
-    [1, 1.035, 1],
-  );
-  const dot = useTransform(
-    progress,
-    [start, center, end],
-    [0.25, 1, 0.25],
-  );
-
-  return (
-    <motion.div style={{ opacity, scale }} className="relative flex items-center gap-4 ps-0">
-      <motion.span
-        aria-hidden="true"
-        style={{ opacity: dot }}
-        className="relative z-10 h-2.5 w-2.5 shrink-0 rounded-full border border-gold bg-ink"
-      />
-      <div className="min-w-0">
-        <span className="block font-heading text-[10px] tracking-[0.2em] text-gold">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <span
-          className={`mt-1 block text-lg text-surface sm:text-xl ${
-            arabic ? "font-heading-ar leading-snug" : "font-heading leading-tight"
-          }`}
-        >
-          {label}
-        </span>
-      </div>
-    </motion.div>
-  );
-}
-
-function ProgressLine({ progress, rtl }: { progress: MotionValue<number>; rtl: boolean }) {
-  const scaleX = useTransform(progress, [0, 1], [0, 1]);
-  return (
-    <div className="hidden w-28 shrink-0 sm:block" aria-hidden="true">
-      <div className="h-px bg-surface/20">
-        <motion.div style={{ scaleX, transformOrigin: rtl ? "right" : "left" }} className="h-px bg-gold" />
-      </div>
-    </div>
-  );
-}
-
-function MobileCinematic({
-  stages,
-  arabic,
-}: {
-  stages: string[];
-  arabic: boolean;
-}) {
+function MobileExperience({ stages, arabic }: { stages: string[]; arabic: boolean }) {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const activeIndex = useActiveStage(scrollYProgress, stages.length);
+  const descriptions = arabic ? stageDescriptions.ar : stageDescriptions.en;
 
   return (
-    <div className="mx-auto block max-w-2xl px-5 lg:hidden">
-      <div className="overflow-hidden rounded-[8px] bg-ink shadow-[0_18px_55px_rgba(0,0,0,0.12)]">
-        <div className="relative aspect-[9/16] max-h-[76svh] min-h-[430px] overflow-hidden">
-          {/* Poster is the guaranteed base layer; the video is progressive enhancement. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={MOBILE_POSTER}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          {!reduceMotion && (
-            <video
+    <div ref={sectionRef} className="lg:hidden" dir={arabic ? "rtl" : "ltr"}>
+      <div className="relative mb-7 overflow-hidden rounded-[12px] bg-ink shadow-[0_22px_60px_rgba(0,0,0,0.12)]">
+        <div className="relative aspect-[9/14] max-h-[620px] min-h-[430px]">
+          <div className="absolute inset-0">
+            <ScrollDrivenVideo
               src={MOBILE_VIDEO}
               poster={MOBILE_POSTER}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              aria-hidden="true"
-              className="absolute inset-0 h-full w-full object-cover"
+              progress={scrollYProgress}
+              className="absolute inset-0"
+              reduceMotion={reduceMotion}
             />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-ink/20" />
-          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-            <p className="font-heading text-[10px] uppercase tracking-[0.28em] text-gold">
-              GIA / DIGITAL MARKETING ADVISORY
-            </p>
-            <p className={`mt-3 text-sm leading-6 text-surface/80 ${arabic ? "font-heading-ar" : "font-body"}`}>
-              {arabic ? "من الاستراتيجية إلى النمو — كنظام واحد." : "From strategy to growth — as one connected system."}
-            </p>
+          </div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-5" dir={arabic ? "rtl" : "ltr"}>
+            <span className="font-heading text-[9px] uppercase tracking-[0.24em] text-white/65">GIA / DIGITAL MARKETING ADVISORY</span>
+            <span className="font-heading text-[9px] tracking-[0.2em] text-white/60">{String(activeIndex + 1).padStart(2, "0")}</span>
+          </div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6">
+            <motion.p
+              key={activeIndex}
+              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.3 }}
+              className={`text-3xl font-semibold tracking-[-0.03em] text-white ${arabic ? "font-heading-ar" : "font-heading"}`}
+            >
+              {stages[activeIndex]}
+            </motion.p>
           </div>
         </div>
+      </div>
 
-        <div className="px-6 py-7 sm:px-8">
-          <div className="mb-6 flex items-center justify-between gap-4">
-            <p className="font-heading text-[10px] uppercase tracking-[0.28em] text-gold">
-              {arabic ? "رحلة النمو" : "Growth journey"}
-            </p>
-            <span className="text-xs text-surface/40">01—06</span>
-          </div>
-          <ol dir={arabic ? "rtl" : "ltr"} className="space-y-0">
-            {stages.map((stage, index) => (
-              <li
-                key={stage}
-                className="flex items-center gap-4 border-t border-surface/10 py-4 first:border-t-0 first:pt-0 last:pb-0"
-              >
-                <span className="font-heading text-[10px] tracking-[0.2em] text-gold">
+      <div className="border-t border-border">
+        {stages.map((stage, index) => {
+          const active = index === activeIndex;
+          return (
+            <div key={`${stage}-${index}`} className={`relative border-b border-border py-4 transition-opacity duration-300 ${active ? "opacity-100" : "opacity-45"}`}>
+              <div className="flex items-start gap-4">
+                <span className={`mt-1 shrink-0 font-heading text-[10px] tracking-[0.18em] ${active ? "text-gold" : "text-muted"}`}>
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className={`text-base text-surface ${arabic ? "font-heading-ar" : "font-heading"}`}>
-                  {stage}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
+                <div className="min-w-0">
+                  <p className={`text-lg font-semibold tracking-[-0.02em] ${active ? "text-ink" : "text-ink/70"} ${arabic ? "font-heading-ar" : "font-heading"}`}>
+                    {stage}
+                  </p>
+                  <p className={`mt-1 text-xs leading-5 text-muted ${active ? "block" : "hidden"} ${arabic ? "font-heading-ar" : "font-body"}`}>
+                    {descriptions[index]}
+                  </p>
+                </div>
+              </div>
+              {active && <div className={`absolute bottom-[-1px] h-px w-12 bg-gold ${arabic ? "right-0" : "left-0"}`} />}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
+}
+
+function useActiveStage(progress: MotionValue<number>, count: number) {
+  const [active, setActive] = useState(0);
+
+  useMotionValueEvent(progress, "change", (value) => {
+    const next = Math.min(count - 1, Math.max(0, Math.floor(value * count)));
+    setActive((current) => (current === next ? current : next));
+  });
+
+  return active;
 }
