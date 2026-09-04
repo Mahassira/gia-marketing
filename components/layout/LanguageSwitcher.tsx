@@ -1,7 +1,6 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useParams } from "next/navigation";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing, localeMeta, type AppLocale } from "@/i18n/routing";
 
@@ -21,7 +20,6 @@ import { routing, localeMeta, type AppLocale } from "@/i18n/routing";
 export function LanguageSwitcher() {
   const activeLocale = useLocale() as AppLocale;
   const pathname = usePathname();
-  const params = useParams();
 
   return (
     <div className="flex items-center gap-2 text-sm font-medium" aria-label={localeMeta[activeLocale].label}>
@@ -35,7 +33,7 @@ export function LanguageSwitcher() {
               </span>
             )}
             <Link
-              href={{ pathname, params }}
+              href={pathname}
               locale={loc}
               aria-current={isActive ? "true" : undefined}
               className={`inline-flex min-h-11 items-center px-0.5 ${
