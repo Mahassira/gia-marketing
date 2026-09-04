@@ -4,13 +4,14 @@ import { Container } from "./Container";
 import { NavLinks } from "./NavLinks";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileNav } from "./MobileNav";
+import { HeaderScrollWrapper } from "./HeaderScrollWrapper";
 
 export async function Header() {
   const t = await getTranslations("nav");
 
   return (
-    <header className="border-b border-border bg-surface">
-      <Container className="flex h-16 items-center justify-between gap-4 lg:h-20">
+    <HeaderScrollWrapper>
+      <Container className="flex h-full items-center justify-between gap-4">
         <Logo />
 
         <nav aria-label={t("primaryNavigation")} className="hidden min-w-0 lg:block">
@@ -23,6 +24,6 @@ export async function Header() {
 
         <MobileNav />
       </Container>
-    </header>
+    </HeaderScrollWrapper>
   );
 }

@@ -21,6 +21,10 @@ export function FinalCtaSection({
   return (
     <Section tone="light">
       <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center sm:gap-6">
+        <div aria-hidden="true" className="flex flex-col items-center gap-2">
+          <span className="h-10 w-px bg-ink/15" />
+          <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+        </div>
         <SectionHeading id="final-cta-heading" align="center" arabic={arabic}>
           {headline}
         </SectionHeading>

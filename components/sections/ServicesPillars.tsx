@@ -26,11 +26,17 @@ export function ServicesPillars({
   return (
     <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
       {pillars.map((pillar) => (
-        <div key={pillar.key} className="border-t border-border pt-5">
+        <div key={pillar.key} className="group border-t border-border pt-5">
           <h3
-            className={`text-lg text-ink ${arabic ? "font-heading-ar" : "font-heading"}`}
+            className={`relative inline-block text-lg text-ink transition-colors ${
+              arabic ? "font-heading-ar" : "font-heading"
+            }`}
           >
             {pillar.title}
+            <span
+              aria-hidden="true"
+              className="absolute -bottom-1 start-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full"
+            />
           </h3>
           <p className="mt-2 text-sm text-muted">{pillar.description}</p>
           <ul className="mt-5 flex flex-col gap-3">

@@ -9,9 +9,11 @@ import {
   getInsightArticles,
 } from "@/lib/content";
 import { Hero } from "@/components/sections/Hero";
+import { CinematicSystemSection } from "@/components/sections/CinematicSystemSection";
 import { IntroSection } from "@/components/sections/IntroSection";
 import { ApproachSection } from "@/components/sections/ApproachSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
+import { AcquisitionSystemSection } from "@/components/sections/AcquisitionSystemSection";
 import { GrowthSystemSection } from "@/components/sections/GrowthSystemSection";
 import { WhyGiaSection } from "@/components/sections/WhyGiaSection";
 import { IndustriesSection } from "@/components/sections/IndustriesSection";
@@ -71,6 +73,8 @@ export default async function HomePage({
         arabic={isAr}
       />
 
+      <CinematicSystemSection stages={homepage.hero.flow} arabic={isAr} />
+
       <IntroSection
         headline={homepage.intro.headline}
         body={homepage.intro.body}
@@ -91,6 +95,14 @@ export default async function HomePage({
         pillars={pillars}
         servicesByPillar={servicesByPillar}
         coreLabel={tCommon("core")}
+        arabic={isAr}
+      />
+
+      <AcquisitionSystemSection
+        headline={homepage.acquisitionSystem.headline}
+        intro={homepage.acquisitionSystem.intro}
+        stages={homepage.acquisitionSystem.journey}
+        cta={homepage.acquisitionSystem.cta}
         arabic={isAr}
       />
 

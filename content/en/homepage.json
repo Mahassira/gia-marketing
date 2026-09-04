@@ -41,6 +41,12 @@
     "journey": ["Reach", "Capture", "Qualify", "Manage", "Follow Up", "Convert", "Grow"],
     "cta": "Build Your Growth System"
   },
+  "acquisitionSystem": {
+    "headline": "One System, From Click To Customer.",
+    "intro": "Whether traffic comes from Google, Meta, or another channel, the same question matters: what happens after someone clicks. GIA connects acquisition to what comes next.",
+    "journey": ["Google / Meta", "Audience", "Campaign", "Landing Page", "Lead", "CRM", "Follow-up", "Conversion", "Growth"],
+    "cta": "Start a Conversation"
+  },
   "whyGia": {
     "headline": "A More Connected Way To Grow.",
     "principles": [

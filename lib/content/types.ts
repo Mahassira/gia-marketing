@@ -162,6 +162,12 @@ export interface HomepageContent {
     journey: string[];
     cta: string;
   };
+  acquisitionSystem: {
+    headline: string;
+    intro: string;
+    journey: string[];
+    cta: string;
+  };
   whyGia: {
     headline: string;
     principles: { title: string; description: string }[];

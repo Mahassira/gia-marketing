@@ -1,4 +1,5 @@
 import { StaggerFlowContainer, StaggerFlowItem } from "@/components/motion/StaggerFlow";
+import { ScrollStageTracker } from "@/components/motion/ScrollStageTracker";
 import { FlowNode, FlowChevron } from "./FlowNode";
 
 /**
@@ -57,28 +58,42 @@ export function GrowthJourney({
         </StaggerFlowContainer>
 
         {/* Desktop: horizontal connected path, same node language as the
-            Hero diagram. */}
-        <StaggerFlowContainer className="hidden items-start lg:flex">
-          {steps.map((step, i) => (
-            <div key={step} className="flex flex-1 items-start last:flex-none">
-              <StaggerFlowItem>
-                <FlowNode index={i} label={step} isLast={i === steps.length - 1} tone="dark" />
-              </StaggerFlowItem>
-              {i < steps.length - 1 && (
-                <div className="flex flex-1 items-center gap-1.5 pt-4">
-                  <StaggerFlowItem
-                    as="connector"
-                    rtl={arabic}
-                    className="h-px flex-1 bg-surface/20"
-                  />
+            Hero diagram. The active stage (as the section scrolls past
+            the viewport center) is emphasized; others dim slightly —
+            reinforcing that this is a live system, not a static chart.
+            Under reduced motion, activeIndex is always null, so every
+            stage stays fully emphasized (a static, equal-weight state). */}
+        <ScrollStageTracker count={steps.length}>
+          {(activeIndex) => (
+            <StaggerFlowContainer className="hidden items-start lg:flex">
+              {steps.map((step, i) => (
+                <div key={step} className="flex flex-1 items-start last:flex-none">
                   <StaggerFlowItem>
-                    <FlowChevron tone="dark" />
+                    <FlowNode
+                      index={i}
+                      label={step}
+                      isLast={i === steps.length - 1}
+                      tone="dark"
+                      emphasized={activeIndex === null || activeIndex === i}
+                    />
                   </StaggerFlowItem>
+                  {i < steps.length - 1 && (
+                    <div className="flex flex-1 items-center gap-1.5 pt-4">
+                      <StaggerFlowItem
+                        as="connector"
+                        rtl={arabic}
+                        className="h-px flex-1 bg-surface/20"
+                      />
+                      <StaggerFlowItem>
+                        <FlowChevron tone="dark" />
+                      </StaggerFlowItem>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
-        </StaggerFlowContainer>
+              ))}
+            </StaggerFlowContainer>
+          )}
+        </ScrollStageTracker>
       </div>
     </>
   );

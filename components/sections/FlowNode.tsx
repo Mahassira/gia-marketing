@@ -10,11 +10,17 @@ export function FlowNode({
   label,
   isLast,
   tone,
+  emphasized = true,
 }: {
   index: number;
   label: string;
   isLast: boolean;
   tone: "light" | "dark";
+  /** When false, the node dims slightly — used for scroll-driven
+   * "active stage" emphasis (Growth System, Approach). Defaults to
+   * true so every existing call site (Hero, Acquisition System, mobile
+   * layouts) is completely unaffected. */
+  emphasized?: boolean;
 }) {
   const number = String(index + 1).padStart(2, "0");
   const circleClass =
@@ -28,7 +34,11 @@ export function FlowNode({
   const labelClass = tone === "dark" ? "text-surface" : "text-ink";
 
   return (
-    <div className="flex flex-col items-center gap-2.5 text-center">
+    <div
+      className={`flex flex-col items-center gap-2.5 text-center transition-opacity duration-300 ${
+        emphasized ? "opacity-100" : "opacity-40"
+      }`}
+    >
       <span
         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-medium sm:h-10 sm:w-10 lg:h-11 lg:w-11 ${circleClass}`}
       >
