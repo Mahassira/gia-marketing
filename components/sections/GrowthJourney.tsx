@@ -1,3 +1,5 @@
+"use client";
+
 import { StaggerFlowContainer, StaggerFlowItem } from "@/components/motion/StaggerFlow";
 import { ScrollStageTracker } from "@/components/motion/ScrollStageTracker";
 import { FlowNode, FlowChevron } from "./FlowNode";
