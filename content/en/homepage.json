@@ -47,6 +47,43 @@
     "journey": ["Google / Meta", "Audience", "Campaign", "Landing Page", "Lead", "CRM", "Follow-up", "Conversion", "Growth"],
     "cta": "Start a Conversation"
   },
+  "integrationEcosystem": {
+    "headline": "Built To Work With The Tools You Already Use.",
+    "intro": "Marketing doesn't happen in one place. GIA connects strategy and execution across the acquisition, CRM, and automation platforms already running in your business.",
+    "flow": ["Acquisition", "Lead", "CRM", "Automation", "Follow-up", "Conversion", "Growth"],
+    "disclaimer": "Platforms are shown to illustrate ecosystem compatibility only. GIA is not an official, certified, or technology partner of any platform listed unless explicitly stated.",
+    "categories": [
+      {
+        "name": "Acquisition & Advertising",
+        "platforms": [
+          { "slug": "google-ads", "name": "Google Ads" },
+          { "slug": "meta-ads", "name": "Meta Ads" },
+          { "slug": "tiktok-ads", "name": "TikTok Ads" }
+        ]
+      },
+      {
+        "name": "CRM & Marketing",
+        "platforms": [
+          { "slug": "hubspot", "name": "HubSpot" },
+          { "slug": "salesforce", "name": "Salesforce" },
+          { "slug": "microsoft-dynamics-365", "name": "Microsoft Dynamics 365" }
+        ]
+      },
+      {
+        "name": "Automation & Productivity",
+        "platforms": [
+          {
+            "slug": "microsoft-power-platform",
+            "name": "Microsoft Power Platform",
+            "detail": "Power Apps · Power Automate · Power BI · Power Pages"
+          },
+          { "slug": "zapier", "name": "Zapier" },
+          { "slug": "make", "name": "Make" },
+          { "slug": "asana", "name": "Asana" }
+        ]
+      }
+    ]
+  },
   "whyGia": {
     "headline": "A More Connected Way To Grow.",
     "principles": [

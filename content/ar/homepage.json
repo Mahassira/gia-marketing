@@ -47,6 +47,43 @@
     "journey": ["جوجل / ميتا", "الجمهور", "الحملة", "صفحة الهبوط", "العميل المحتمل", "إدارة علاقات العملاء", "المتابعة", "التحويل", "النمو"],
     "cta": "ابدأ الحوار"
   },
+  "integrationEcosystem": {
+    "headline": "مبنية للعمل مع الأدوات التي تستخدمها بالفعل.",
+    "intro": "التسويق لا يحدث في مكان واحد. تربط جيا الاستراتيجية والتنفيذ عبر منصات الاستقطاب وإدارة علاقات العملاء والأتمتة العاملة بالفعل في عملك.",
+    "flow": ["الاستقطاب", "العميل المحتمل", "إدارة علاقات العملاء", "الأتمتة", "المتابعة", "التحويل", "النمو"],
+    "disclaimer": "تُعرض المنصات هنا لتوضيح التوافق مع منظومة العمل فقط. جيا ليست شريكًا رسميًا أو معتمدًا أو شريك تقنية لأي من المنصات المذكورة ما لم يُنص على ذلك صراحة.",
+    "categories": [
+      {
+        "name": "الاستقطاب والإعلانات",
+        "platforms": [
+          { "slug": "google-ads", "name": "إعلانات جوجل" },
+          { "slug": "meta-ads", "name": "إعلانات ميتا" },
+          { "slug": "tiktok-ads", "name": "إعلانات تيك توك" }
+        ]
+      },
+      {
+        "name": "إدارة علاقات العملاء والتسويق",
+        "platforms": [
+          { "slug": "hubspot", "name": "HubSpot" },
+          { "slug": "salesforce", "name": "Salesforce" },
+          { "slug": "microsoft-dynamics-365", "name": "Microsoft Dynamics 365" }
+        ]
+      },
+      {
+        "name": "الأتمتة والإنتاجية",
+        "platforms": [
+          {
+            "slug": "microsoft-power-platform",
+            "name": "Microsoft Power Platform",
+            "detail": "Power Apps · Power Automate · Power BI · Power Pages"
+          },
+          { "slug": "zapier", "name": "Zapier" },
+          { "slug": "make", "name": "Make" },
+          { "slug": "asana", "name": "Asana" }
+        ]
+      }
+    ]
+  },
   "whyGia": {
     "headline": "طريقة أكثر ترابطًا للنمو.",
     "principles": [

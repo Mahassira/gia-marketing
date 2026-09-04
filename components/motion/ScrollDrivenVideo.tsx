@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
+import { useScroll, useMotionValueEvent, useReducedMotion, type MotionValue } from "framer-motion";
 
 interface ScrollDrivenVideoProps {
-  /** e.g. "/media/gia-growth-system.mp4" — does not exist yet (Phase 7C). */
+  /** e.g. "/media/gia-cinematic-desktop.mp4" */
   src: string;
   /** Static fallback shown until the video can scrub, under reduced
    * motion, and as the base image on mobile (see below). Required —
@@ -12,23 +12,29 @@ interface ScrollDrivenVideoProps {
    * pending or unavailable. */
   poster: string;
   className?: string;
+  /**
+   * Optional externally-computed scroll progress (0→1), for when this
+   * video needs to stay in sync with other scroll-linked elements
+   * already tracking the same container (e.g. CinematicSystemSection's
+   * stage labels/ring, which compute their own scrollYProgress against
+   * the outer pinned-panel container). When omitted, the component
+   * manages its own scroll tracking against its own wrapping element —
+   * the original, standalone behavior.
+   */
+  progress?: MotionValue<number>;
 }
 
 /**
- * Phase 7B: this component is built and ready, but not used by any
- * homepage section yet — no real video file exists (Phase 7C, once the
- * asset and visual direction are finalized). Dropping a real file at
- * the `src` path and wiring this into a section is the only change
- * needed later; nothing about this architecture should need to change.
+ * Phase 7C: wired to real video assets (see CinematicSystemSection).
  *
- * Design decisions (per the approved Phase 7A plan):
+ * Design decisions (per the approved Phase 7A/7B plan):
  * - currentTime + rAF, not naive per-scroll-event seeking: scroll
  *   events fire far more often than a video can usefully seek, and
  *   assigning currentTime synchronously on every event causes visible
  *   stutter on most browsers. Progress is captured on every scroll
  *   (via Framer Motion's useScroll, which already throttles via rAF
  *   internally) but only actually applied to the <video> when it has
- *   moved enough to matter (see MIN_DELTA below) — this is the
+ *   moved enough to matter (see MIN_DELTA_SECONDS below) — this is the
  *   "prevent excessive seeking" requirement.
  * - Mobile: scroll-scrubbing video is CPU/GPU-costly on mobile devices
  *   and unreliable on several mobile browsers' seek implementations.
@@ -43,7 +49,12 @@ interface ScrollDrivenVideoProps {
  *   buffered data to scrub; if that never resolves, the poster simply
  *   stays — there is no broken/blank state.
  */
-export function ScrollDrivenVideo({ src, poster, className = "" }: ScrollDrivenVideoProps) {
+export function ScrollDrivenVideo({
+  src,
+  poster,
+  className = "",
+  progress: externalProgress,
+}: ScrollDrivenVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const lastAppliedTime = useRef(0);
@@ -52,10 +63,13 @@ export function ScrollDrivenVideo({ src, poster, className = "" }: ScrollDrivenV
 
   const MIN_DELTA_SECONDS = 1 / 30; // don't re-seek for sub-frame-scale changes
 
-  const { scrollYProgress } = useScroll({
+  // Always called (rules of hooks) — only actually used as the driving
+  // progress value when no external one is supplied.
+  const { scrollYProgress: internalProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
+  const progress = externalProgress ?? internalProgress;
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -75,12 +89,12 @@ export function ScrollDrivenVideo({ src, poster, className = "" }: ScrollDrivenV
     return () => video.removeEventListener("loadeddata", handleCanScrub);
   }, [shouldReduceMotion]);
 
-  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+  useMotionValueEvent(progress, "change", (latest) => {
     if (!canScrub || shouldReduceMotion) return;
     const video = videoRef.current;
     if (!video || !video.duration) return;
 
-    const targetTime = progress * video.duration;
+    const targetTime = latest * video.duration;
     if (Math.abs(targetTime - lastAppliedTime.current) < MIN_DELTA_SECONDS) return;
 
     video.currentTime = targetTime;
@@ -88,12 +102,12 @@ export function ScrollDrivenVideo({ src, poster, className = "" }: ScrollDrivenV
   });
 
   return (
-    <div ref={containerRef} className={className}>
+    <div ref={containerRef} className={`relative ${className}`}>
       {/* Poster is always in the DOM as the base layer — it's what
           reduced-motion and mobile users see, and what everyone sees
           before the video is scrub-ready. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={poster} alt="" className="h-full w-full object-cover" />
+      <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
       {!shouldReduceMotion && (
         <video
           ref={videoRef}
@@ -103,7 +117,7 @@ export function ScrollDrivenVideo({ src, poster, className = "" }: ScrollDrivenV
           playsInline
           preload="metadata"
           aria-hidden="true"
-          className={`h-full w-full object-cover ${canScrub ? "" : "hidden"}`}
+          className={`absolute inset-0 h-full w-full object-cover ${canScrub ? "" : "hidden"}`}
         />
       )}
     </div>

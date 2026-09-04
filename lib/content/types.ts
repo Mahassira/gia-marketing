@@ -168,6 +168,16 @@ export interface HomepageContent {
     journey: string[];
     cta: string;
   };
+  integrationEcosystem: {
+    headline: string;
+    intro: string;
+    flow: string[];
+    disclaimer: string;
+    categories: {
+      name: string;
+      platforms: { slug: string; name: string; detail?: string }[];
+    }[];
+  };
   whyGia: {
     headline: string;
     principles: { title: string; description: string }[];

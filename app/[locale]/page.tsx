@@ -15,6 +15,7 @@ import { ApproachSection } from "@/components/sections/ApproachSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { AcquisitionSystemSection } from "@/components/sections/AcquisitionSystemSection";
 import { GrowthSystemSection } from "@/components/sections/GrowthSystemSection";
+import { IntegrationEcosystemSection } from "@/components/sections/IntegrationEcosystemSection";
 import { WhyGiaSection } from "@/components/sections/WhyGiaSection";
 import { IndustriesSection } from "@/components/sections/IndustriesSection";
 import { WorkSection } from "@/components/sections/WorkSection";
@@ -22,10 +23,14 @@ import { InsightsSection } from "@/components/sections/InsightsSection";
 import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 
 /**
- * The full GIA.marketing homepage (Phase 3). Every section here is a
- * Server Component — no client JS is shipped for the homepage itself,
- * since nothing on it needs interactivity beyond CSS :hover states and
- * plain navigation links.
+ * The full GIA.marketing homepage. This page component itself is a
+ * Server Component and every section is composed here server-side —
+ * but by Phase 7 the page also includes several small, isolated
+ * client components for scroll-driven motion (Reveal, StaggerFlow,
+ * ScrollStageTracker) and the Cinematic section's scroll-scrubbed
+ * video. Data fetching and layout stay server-rendered throughout;
+ * only the specific pieces that need scroll/motion interactivity are
+ * client boundaries.
  */
 export default async function HomePage({
   params,
@@ -111,6 +116,15 @@ export default async function HomePage({
         body={homepage.growthSystem.body}
         journey={homepage.growthSystem.journey}
         cta={homepage.growthSystem.cta}
+        arabic={isAr}
+      />
+
+      <IntegrationEcosystemSection
+        headline={homepage.integrationEcosystem.headline}
+        intro={homepage.integrationEcosystem.intro}
+        flow={homepage.integrationEcosystem.flow}
+        disclaimer={homepage.integrationEcosystem.disclaimer}
+        categories={homepage.integrationEcosystem.categories}
         arabic={isAr}
       />
 

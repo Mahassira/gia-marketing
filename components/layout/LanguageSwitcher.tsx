@@ -1,7 +1,6 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useParams } from "next/navigation";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing, localeMeta, type AppLocale } from "@/i18n/routing";
 
@@ -10,8 +9,15 @@ import { routing, localeMeta, type AppLocale } from "@/i18n/routing";
  * flex row + dir inheritance). Uses next-intl's Link with an explicit
  * `locale` override so the same page/path is preserved across the
  * switch — e.g. /en/services/branding -> /ar/services/branding, not
- * back to the homepage. Params are passed through for pages with
- * dynamic segments (service/case-study/insight slugs).
+ * back to the homepage.
+ *
+ * `usePathname()` here returns the fully resolved current path (e.g.
+ * "/services/lead-generation", with any dynamic slug already filled
+ * in) rather than a route template — this project doesn't configure
+ * next-intl's `pathnames` map in routing.ts, so there's no separate
+ * `params` object to pass, and next-intl's Link href type doesn't
+ * accept one in this configuration (passing it caused a production
+ * TypeScript build failure: `params` does not exist on `UrlObject`).
  *
  * The `NEXT_LOCALE` cookie is set automatically by next-intl's request
  * handling in proxy.ts whenever a locale-prefixed route is visited, so
@@ -21,7 +27,6 @@ import { routing, localeMeta, type AppLocale } from "@/i18n/routing";
 export function LanguageSwitcher() {
   const activeLocale = useLocale() as AppLocale;
   const pathname = usePathname();
-  const params = useParams();
 
   return (
     <div className="flex items-center gap-2 text-sm font-medium" aria-label={localeMeta[activeLocale].label}>
@@ -35,7 +40,7 @@ export function LanguageSwitcher() {
               </span>
             )}
             <Link
-              href={{ pathname, params }}
+              href={pathname}
               locale={loc}
               aria-current={isActive ? "true" : undefined}
               className={`inline-flex min-h-11 items-center px-0.5 ${
