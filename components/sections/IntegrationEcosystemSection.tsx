@@ -43,7 +43,7 @@ export function IntegrationEcosystemSection({
   headline: string;
   intro: string;
   flow: string[];
-  disclaimer: string;
+  disclaimer?: string;
   categories: Category[];
   arabic: boolean;
 }) {
@@ -75,35 +75,39 @@ export function IntegrationEcosystemSection({
         ))}
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-12 sm:grid-cols-3 sm:gap-8">
-        {categories.map((category) => (
-          <div key={category.name} className="border-t border-border pt-5">
-            <h3
-              className={`text-base text-ink ${arabic ? "font-heading-ar" : "font-heading"}`}
-            >
-              {category.name}
-            </h3>
-            <ul className="mt-4 flex flex-col gap-3">
-              {category.platforms.map((platform) => (
-                <li key={platform.slug} className="flex items-start gap-2.5">
-                  <span
-                    aria-hidden="true"
-                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
-                  />
-                  <div>
-                    <PlatformMark slug={platform.slug} name={platform.name} />
-                    {platform.detail && (
-                      <p className="mt-0.5 text-xs text-muted">{platform.detail}</p>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+      {categories.length > 0 && (
+        <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-12 sm:grid-cols-3 sm:gap-8">
+          {categories.map((category) => (
+            <div key={category.name} className="border-t border-border pt-5">
+              <h3
+                className={`text-base text-ink ${arabic ? "font-heading-ar" : "font-heading"}`}
+              >
+                {category.name}
+              </h3>
+              <ul className="mt-4 flex flex-col gap-3">
+                {category.platforms.map((platform) => (
+                  <li key={platform.slug} className="flex items-start gap-2.5">
+                    <span
+                      aria-hidden="true"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
+                    />
+                    <div>
+                      <PlatformMark slug={platform.slug} name={platform.name} />
+                      {platform.detail && (
+                        <p className="mt-0.5 text-xs text-muted">{platform.detail}</p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
 
-      <p className="mt-10 max-w-2xl text-xs text-muted sm:mt-12">{disclaimer}</p>
+      {disclaimer && (
+        <p className="mt-10 max-w-2xl text-xs text-muted sm:mt-12">{disclaimer}</p>
+      )}
     </Section>
   );
 }

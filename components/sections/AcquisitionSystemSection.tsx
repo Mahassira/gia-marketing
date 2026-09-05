@@ -2,6 +2,7 @@ import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionWatermark } from "@/components/motion/SectionWatermark";
 import { AcquisitionSystemDiagram } from "./AcquisitionSystemDiagram";
 
 /**
@@ -25,22 +26,25 @@ export function AcquisitionSystemSection({
   arabic: boolean;
 }) {
   return (
-    <Section tone="light" className="py-10 sm:py-14 lg:py-16">
-      <Reveal className="max-w-2xl">
-        <SectionHeading id="acquisition-system-heading" arabic={arabic}>
-          {headline}
-        </SectionHeading>
-        <p className="mt-4 text-base text-muted sm:text-lg">{intro}</p>
-      </Reveal>
+    <Section tone="light" className="relative py-10 sm:py-14 lg:py-16">
+      <SectionWatermark size="compact" />
+      <div className="relative z-10">
+        <Reveal className="max-w-2xl">
+          <SectionHeading id="acquisition-system-heading" arabic={arabic}>
+            {headline}
+          </SectionHeading>
+          <p className="mt-4 text-base text-muted sm:text-lg">{intro}</p>
+        </Reveal>
 
-      <div className="mt-8 sm:mt-10">
-        <AcquisitionSystemDiagram stages={stages} arabic={arabic} />
-      </div>
+        <div className="mt-8 sm:mt-10">
+          <AcquisitionSystemDiagram stages={stages} arabic={arabic} />
+        </div>
 
-      <div className="mt-8 flex justify-center sm:mt-10">
-        <Button href="/contact" variant="primary">
-          {cta}
-        </Button>
+        <div className="mt-8 flex justify-center sm:mt-10">
+          <Button href="/contact" variant="primary">
+            {cta}
+          </Button>
+        </div>
       </div>
     </Section>
   );

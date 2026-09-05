@@ -172,7 +172,9 @@ export interface HomepageContent {
     headline: string;
     intro: string;
     flow: string[];
-    disclaimer: string;
+    /** Optional — omitted entirely when there's nothing to disclaim
+     * (e.g. no specific platforms are currently listed). */
+    disclaimer?: string;
     categories: {
       name: string;
       platforms: { slug: string; name: string; detail?: string }[];

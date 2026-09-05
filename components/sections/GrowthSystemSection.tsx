@@ -1,6 +1,7 @@
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { SectionWatermark } from "@/components/motion/SectionWatermark";
 import { GrowthJourney } from "./GrowthJourney";
 
 interface GrowthSystemSectionProps {
@@ -19,8 +20,9 @@ export function GrowthSystemSection({
   arabic,
 }: GrowthSystemSectionProps) {
   return (
-    <Section tone="dark">
-      <div className="max-w-2xl">
+    <Section tone="dark" className="relative">
+      <SectionWatermark tone="dark" />
+      <div className="relative z-10 max-w-2xl">
         <SectionHeading id="growth-system-heading" tone="dark" arabic={arabic}>
           {headline}
         </SectionHeading>
@@ -36,7 +38,7 @@ export function GrowthSystemSection({
         </Button>
       </div>
 
-      <div className="mt-12 border-t border-surface/15 pt-8 sm:mt-14 sm:pt-10 lg:mt-16">
+      <div className="relative z-10 mt-12 border-t border-surface/15 pt-8 sm:mt-14 sm:pt-10 lg:mt-16">
         <GrowthJourney steps={journey} arabic={arabic} />
       </div>
     </Section>

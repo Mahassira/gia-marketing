@@ -1,11 +1,18 @@
 {
   "hero": {
     "label": "GIA — DIGITAL MARKETING ADVISORY",
-    "headline": "Better Marketing Starts With Better Decisions.",
-    "supportingText": "We help businesses turn marketing into a connected system — from strategy and customer acquisition to lead management, conversion, and growth.",
+    "headline": "One System for Every Part of Marketing.",
+    "supportingText": "From strategy and brand development to content, social media, advertising, lead generation, CRM, automation, and traditional marketing — we connect every element into one integrated system, built around your business and its growth objectives.",
     "primaryCta": "Start a Conversation",
     "secondaryCta": "Explore Our Services",
-    "flow": ["Strategy", "Marketing", "Leads", "CRM", "Conversion", "Growth"]
+    "flow": [
+      "Strategy",
+      "Marketing",
+      "Leads",
+      "CRM",
+      "Conversion",
+      "Growth"
+    ]
   },
   "intro": {
     "headline": "Marketing Should Work As A System.",
@@ -20,11 +27,31 @@
     "headline": "We Don't Start With A Channel. We Start With The Business.",
     "intro": "We first understand business objectives, market, customers, challenges, and opportunities before recommending a single channel or tactic.",
     "steps": [
-      { "number": "01", "title": "Understand", "description": "We start by understanding your business, market, and customers before anything else." },
-      { "number": "02", "title": "Strategize", "description": "We translate that understanding into a clear marketing and growth strategy." },
-      { "number": "03", "title": "Execute", "description": "We bring the strategy to life across the right channels and systems." },
-      { "number": "04", "title": "Measure", "description": "We track performance against the objectives that matter to your business." },
-      { "number": "05", "title": "Grow", "description": "We use what we learn to refine the approach and compound results over time." }
+      {
+        "number": "01",
+        "title": "Understand",
+        "description": "We start by understanding your business, market, and customers before anything else."
+      },
+      {
+        "number": "02",
+        "title": "Strategize",
+        "description": "We translate that understanding into a clear marketing and growth strategy."
+      },
+      {
+        "number": "03",
+        "title": "Execute",
+        "description": "We bring the strategy to life across the right channels and systems."
+      },
+      {
+        "number": "04",
+        "title": "Measure",
+        "description": "We track performance against the objectives that matter to your business."
+      },
+      {
+        "number": "05",
+        "title": "Grow",
+        "description": "We use what we learn to refine the approach and compound results over time."
+      }
     ]
   },
   "servicesSection": {
@@ -38,59 +65,66 @@
       "The real opportunity comes from what happens next.",
       "GIA helps businesses connect marketing with the systems needed to capture, qualify, manage, follow up, and convert opportunities."
     ],
-    "journey": ["Reach", "Capture", "Qualify", "Manage", "Follow Up", "Convert", "Grow"],
+    "journey": [
+      "Reach",
+      "Capture",
+      "Qualify",
+      "Manage",
+      "Follow Up",
+      "Convert",
+      "Grow"
+    ],
     "cta": "Build Your Growth System"
   },
   "acquisitionSystem": {
     "headline": "One System, From Click To Customer.",
     "intro": "Whether traffic comes from Google, Meta, or another channel, the same question matters: what happens after someone clicks. GIA connects acquisition to what comes next.",
-    "journey": ["Google / Meta", "Audience", "Campaign", "Landing Page", "Lead", "CRM", "Follow-up", "Conversion", "Growth"],
+    "journey": [
+      "Google / Meta / LinkedIn",
+      "Audience",
+      "Campaign",
+      "Landing Page",
+      "Lead",
+      "CRM",
+      "Follow-up",
+      "Conversion",
+      "Growth"
+    ],
     "cta": "Start a Conversation"
   },
   "integrationEcosystem": {
     "headline": "Built To Work With The Tools You Already Use.",
     "intro": "Marketing doesn't happen in one place. GIA connects strategy and execution across the acquisition, CRM, and automation platforms already running in your business.",
-    "flow": ["Acquisition", "Lead", "CRM", "Automation", "Follow-up", "Conversion", "Growth"],
-    "disclaimer": "Platforms are shown to illustrate ecosystem compatibility only. GIA is not an official, certified, or technology partner of any platform listed unless explicitly stated.",
-    "categories": [
-      {
-        "name": "Acquisition & Advertising",
-        "platforms": [
-          { "slug": "google-ads", "name": "Google Ads" },
-          { "slug": "meta-ads", "name": "Meta Ads" },
-          { "slug": "tiktok-ads", "name": "TikTok Ads" }
-        ]
-      },
-      {
-        "name": "CRM & Marketing",
-        "platforms": [
-          { "slug": "hubspot", "name": "HubSpot" },
-          { "slug": "salesforce", "name": "Salesforce" },
-          { "slug": "microsoft-dynamics-365", "name": "Microsoft Dynamics 365" }
-        ]
-      },
-      {
-        "name": "Automation & Productivity",
-        "platforms": [
-          {
-            "slug": "microsoft-power-platform",
-            "name": "Microsoft Power Platform",
-            "detail": "Power Apps · Power Automate · Power BI · Power Pages"
-          },
-          { "slug": "zapier", "name": "Zapier" },
-          { "slug": "make", "name": "Make" },
-          { "slug": "asana", "name": "Asana" }
-        ]
-      }
-    ]
+    "flow": [
+      "Acquisition",
+      "Lead",
+      "CRM",
+      "Automation",
+      "Follow-up",
+      "Conversion",
+      "Growth"
+    ],
+    "categories": []
   },
   "whyGia": {
     "headline": "A More Connected Way To Grow.",
     "principles": [
-      { "title": "Business First", "description": "We start with your business objectives, not a predefined package of services." },
-      { "title": "Strategy + Execution", "description": "We connect strategic thinking with practical marketing and implementation." },
-      { "title": "Connected Systems", "description": "Marketing, lead generation, CRM, customer journeys, and conversion should work together." },
-      { "title": "Measurable Thinking", "description": "We focus on performance, learning, and continuous improvement." }
+      {
+        "title": "Business First",
+        "description": "We start with your business objectives, not a predefined package of services."
+      },
+      {
+        "title": "Strategy + Execution",
+        "description": "We connect strategic thinking with practical marketing and implementation."
+      },
+      {
+        "title": "Connected Systems",
+        "description": "Marketing, lead generation, CRM, customer journeys, and conversion should work together."
+      },
+      {
+        "title": "Measurable Thinking",
+        "description": "We focus on performance, learning, and continuous improvement."
+      }
     ]
   },
   "industriesSection": {

@@ -1,6 +1,7 @@
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionWatermark } from "@/components/motion/SectionWatermark";
 
 interface IntroSectionProps {
   headline: string;
@@ -11,8 +12,9 @@ interface IntroSectionProps {
 
 export function IntroSection({ headline, body, highlight, arabic }: IntroSectionProps) {
   return (
-    <Section tone="alt">
-      <Reveal className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
+    <Section tone="alt" className="relative">
+      <SectionWatermark />
+      <Reveal className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <SectionHeading id="intro-heading" arabic={arabic}>
             {headline}

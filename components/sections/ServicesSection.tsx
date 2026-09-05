@@ -2,6 +2,7 @@ import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServicesPillars } from "./ServicesPillars";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionWatermark } from "@/components/motion/SectionWatermark";
 import type { Service, ServicePillar } from "@/lib/content/types";
 
 interface ServicesSectionProps {
@@ -22,20 +23,25 @@ export function ServicesSection({
   arabic,
 }: ServicesSectionProps) {
   return (
-    <Section tone="alt">
-      <Reveal className="max-w-2xl">
-        <SectionHeading id="services-heading" arabic={arabic}>
-          {headline}
-        </SectionHeading>
-        <p className="mt-4 text-base text-muted sm:text-lg">{intro}</p>
-      </Reveal>
-      <div className="mt-10 sm:mt-12">
-        <ServicesPillars
-          pillars={pillars}
-          servicesByPillar={servicesByPillar}
-          coreLabel={coreLabel}
-          arabic={arabic}
-        />
+    <Section tone="alt" className="relative">
+      {/* Slightly reduced opacity — this section already has gold "Core"
+          badges and bullet dots throughout the pillar lists. */}
+      <SectionWatermark opacity={0.03} />
+      <div className="relative z-10">
+        <Reveal className="max-w-2xl">
+          <SectionHeading id="services-heading" arabic={arabic}>
+            {headline}
+          </SectionHeading>
+          <p className="mt-4 text-base text-muted sm:text-lg">{intro}</p>
+        </Reveal>
+        <div className="mt-10 sm:mt-12">
+          <ServicesPillars
+            pillars={pillars}
+            servicesByPillar={servicesByPillar}
+            coreLabel={coreLabel}
+            arabic={arabic}
+          />
+        </div>
       </div>
     </Section>
   );
