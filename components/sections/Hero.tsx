@@ -4,7 +4,6 @@ import { useReducedMotion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
-import { StrategyFlowDiagram } from "./StrategyFlowDiagram";
 
 const DESKTOP_VIDEO = "/media/gia-cinematic-desktop.mp4";
 const DESKTOP_POSTER = "/media/gia-cinematic-desktop-poster.jpg";
@@ -26,9 +25,11 @@ interface HeroProps {
  * request: the approved Cairo/GIA video plays as an ambient background
  * (autoplay, muted, looped — NOT scroll-scrubbed, since this section
  * is visible immediately with no scroll needed), with the existing
- * Hero content (label, H1, supporting text, CTAs, flow diagram)
- * overlaid on top in white/light text. No new copy, no new content —
- * same approved fields, new visual treatment only.
+ * Hero content (label, H1, supporting text, CTAs) overlaid on top in
+ * white/light text. The 6-stage flow diagram that used to sit below
+ * the CTAs was removed per explicit request — it was covering the
+ * video's own GIA logo reveal; the CTAs were also pushed down slightly
+ * so that logo stays clearly visible in the empty space above them.
  *
  * The standalone CinematicSystemSection is no longer rendered on the
  * homepage as a separate section (its scroll-driven multi-viewport
@@ -46,7 +47,6 @@ export function Hero({
   supportingText,
   primaryCta,
   secondaryCta,
-  flowLabels,
   arabic,
 }: HeroProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -115,7 +115,7 @@ export function Hero({
           </h1>
           <p className="max-w-xl text-base text-surface/90 [text-shadow:0_1px_6px_rgba(0,0,0,0.4)] sm:text-lg">{supportingText}</p>
 
-          <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
+          <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:gap-4">
             <Button href="/contact" variant="primary" className="w-full sm:w-auto">
               {primaryCta}
             </Button>
@@ -123,10 +123,6 @@ export function Hero({
               {secondaryCta}
             </Button>
           </div>
-        </Reveal>
-
-        <Reveal delay={0.15} className="mt-2 lg:mt-4">
-          <StrategyFlowDiagram labels={flowLabels} arabic={arabic} />
         </Reveal>
       </Container>
     </section>

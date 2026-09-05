@@ -1,28 +1,43 @@
 Real GIA logo assets, provided by the client.
 
-- logo.svg — the ORIGINAL file exactly as provided (the "_transparent"
-  export). Kept completely unchanged as the source asset. Has a large
-  transparent canvas margin around the artwork (by design of the
-  original export — a square social-media-style canvas).
-- logo-web.svg — the WEB DERIVATIVE actually used in Header/Footer.
-  This is logo.svg with ONLY the root <svg> viewBox/width/height
-  changed to crop away the unused transparent margin. No path data,
-  no colors, no shapes were touched — every coordinate inside the file
-  is byte-identical to logo.svg; only the visible "window" (viewBox)
-  onto that same coordinate space was tightened, computed precisely
-  from the actual artwork bounding box (droplet + wordmark + tagline),
-  plus a small (~3%) clear-space margin.
-- logo-fallback.png — the client's provided PNG. Originally had a
-  flattened white background (no real alpha) — replaced with a
-  corrected export that has genuine RGBA transparency. Same artwork,
-  same proportions (verified: identical ink bounding box), just fixed
-  transparency. Safe to use on non-white backgrounds now too.
-- logo-source-raster-export.svg — the client's second provided file.
-  Despite the .svg extension, this is NOT a vector graphic — it's a
-  flattened raster PNG (with a white background rect) wrapped in SVG
-  markup, an artifact of a PDF export. Kept for provenance only; not
-  used anywhere in the app.
+CURRENTLY ACTIVE (used by components/ui/Logo.tsx):
+- logo-web-v2.png — the current approved logo, with the updated
+  tagline ("Marketing House" / "for Digital Marketing advisory").
+  Derived from logo-v2-source.png via two purely mechanical steps,
+  neither of which touched any pixel of the actual artwork:
+    1. The source had an unintended fully-opaque white band behind the
+       logo (verified: solid RGB 255/255/255, spanning the full canvas
+       width at exactly the logo's row range — an export artifact, not
+       part of the design). Those near-white pixels were made
+       transparent; every other pixel's color is unchanged.
+    2. Cropped to the real content bounding box (droplet + wordmark +
+       tagline) with a small clear-space margin.
+  Known minor artifact: a faint white edge "fringe" is visible around
+  the droplet/letters when placed on a non-white background — a normal
+  byproduct of a simple threshold-based background fix rather than a
+  proper alpha matte. Imperceptible at the size this renders in the
+  header (28–36px tall) but worth knowing about if it's ever used
+  larger.
+- logo-v2-source.png — the exact file uploaded by the client for this
+  version, kept byte-for-byte unmodified as provenance.
 
-Nothing here has been redrawn, recolored, or recomposed. The favicon
-set in public/brand/favicon/ is a simple crop-to-content + resize
-derivation of logo-fallback.png (see that folder's README).
+PREVIOUS VERSION (kept for provenance, no longer referenced by code):
+- logo-web.svg — the prior approved logo (tagline: "FOR DIGITAL
+  MARKETING ADVISORY", one line), a tightly-cropped vector derivative
+  of logo.svg.
+- logo.svg — the original full-canvas vector file for the previous
+  version, exactly as provided.
+- logo-fallback.png — the previous version's PNG export (genuinely
+  transparent, fixed in an earlier round).
+- logo-source-raster-export.svg — not a real vector graphic despite
+  the extension (a flattened raster wrapped in SVG markup); kept for
+  provenance only.
+
+Nothing here has been redrawn, recolored, or recomposed at any point —
+only cropping and a mechanical transparency fix, both documented above.
+
+The site's written positioning text ("GIA — Digital Marketing
+Advisory") was deliberately NOT changed to match the new logo's
+tagline — per explicit instruction, only the logo image itself was
+updated; all page copy, SEO metadata, and structured data remain
+"GIA — Digital Marketing Advisory" throughout.

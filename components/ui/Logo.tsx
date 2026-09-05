@@ -3,16 +3,29 @@ import path from "node:path";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
-// logo-web.svg is a tightly-cropped derivative of the real logo.svg —
-// same paths, same raster, only the viewBox/width/height were changed to
-// remove the large unused transparent canvas margin. logo.svg (the
-// original, full-canvas file exactly as provided by the client) is kept
-// untouched as the source asset.
-const LOGO_PATH = "/brand/logo/logo-web.svg";
+// logo-web-v2.png is the current approved logo — updated tagline
+// ("Marketing House" / "for Digital Marketing advisory") per the
+// client's newly provided artwork. It's a PNG, not the earlier SVG,
+// because only a raster export was provided for this version (no
+// vector source). Two things were done to it, both purely mechanical,
+// never redrawing any part of the artwork itself:
+//   1. The source file had an unintended fully-opaque white band
+//      behind the logo (verified: same color value, RGB 255/255/255,
+//      spanning the full canvas width at the logo's exact row range —
+//      not part of the design, an export artifact). Those near-white
+//      pixels were made transparent; every other pixel's color is
+//      byte-identical to the source.
+//   2. Cropped to the real content bounding box (droplet + wordmark +
+//      tagline) with a small clear-space margin — same methodology as
+//      the original logo crop.
+// logo-v2-source.png (the untouched original upload) and the previous
+// logo-web.svg/logo.svg (prior approved version) are kept for
+// provenance, not deleted.
+const LOGO_PATH = "/brand/logo/logo-web-v2.png";
 
 function realLogoExists(): boolean {
   try {
-    return fs.existsSync(path.join(process.cwd(), "public", "brand", "logo", "logo-web.svg"));
+    return fs.existsSync(path.join(process.cwd(), "public", "brand", "logo", "logo-web-v2.png"));
   } catch {
     return false;
   }
