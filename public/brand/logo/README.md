@@ -12,10 +12,11 @@ Real GIA logo assets, provided by the client.
   onto that same coordinate space was tightened, computed precisely
   from the actual artwork bounding box (droplet + wordmark + tagline),
   plus a small (~3%) clear-space margin.
-- logo-fallback.png — the client's provided PNG. Note: despite being
-  called "transparent," this file is RGB with no alpha channel and has
-  a plain white background baked in. Fine on white surfaces; would show
-  a white box on a non-white background. Kept as-provided, unmodified.
+- logo-fallback.png — the client's provided PNG. Originally had a
+  flattened white background (no real alpha) — replaced with a
+  corrected export that has genuine RGBA transparency. Same artwork,
+  same proportions (verified: identical ink bounding box), just fixed
+  transparency. Safe to use on non-white backgrounds now too.
 - logo-source-raster-export.svg — the client's second provided file.
   Despite the .svg extension, this is NOT a vector graphic — it's a
   flattened raster PNG (with a white background rect) wrapped in SVG

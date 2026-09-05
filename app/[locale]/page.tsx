@@ -8,8 +8,11 @@ import {
   getCaseStudies,
   getInsightArticles,
 } from "@/lib/content";
+// CinematicSystemSection is no longer rendered here — the cinematic
+// video is now the background of Hero itself (merged per explicit
+// request). The component file is intentionally kept, unused, rather
+// than deleted, in case the standalone section is wanted again.
 import { Hero } from "@/components/sections/Hero";
-import { CinematicSystemSection } from "@/components/sections/CinematicSystemSection";
 import { IntroSection } from "@/components/sections/IntroSection";
 import { ApproachSection } from "@/components/sections/ApproachSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
@@ -27,10 +30,15 @@ import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
  * Server Component and every section is composed here server-side —
  * but by Phase 7 the page also includes several small, isolated
  * client components for scroll-driven motion (Reveal, StaggerFlow,
- * ScrollStageTracker) and the Cinematic section's scroll-scrubbed
- * video. Data fetching and layout stay server-rendered throughout;
- * only the specific pieces that need scroll/motion interactivity are
- * client boundaries.
+ * ScrollStageTracker), plus Hero itself (which needs useReducedMotion()
+ * to decide whether to autoplay its background video). Data fetching
+ * and layout stay server-rendered throughout; only the specific
+ * pieces that need motion/video interactivity are client boundaries.
+ *
+ * Note: the standalone CinematicSystemSection is no longer rendered
+ * here — its content was merged into Hero (the cinematic video is now
+ * Hero's own background) per explicit request. The component file
+ * still exists, unused, in case the separate section is wanted again.
  */
 export default async function HomePage({
   params,
@@ -77,8 +85,6 @@ export default async function HomePage({
         flowLabels={homepage.hero.flow}
         arabic={isAr}
       />
-
-      <CinematicSystemSection stages={homepage.hero.flow} arabic={isAr} />
 
       <IntroSection
         headline={homepage.intro.headline}

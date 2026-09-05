@@ -1,7 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, type MotionValue } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+  type MotionValue,
+} from "framer-motion";
 import { ScrollDrivenVideo } from "@/components/motion/ScrollDrivenVideo";
 
 const DESKTOP_VIDEO = "/media/gia-cinematic-desktop.mp4";
@@ -9,25 +15,41 @@ const DESKTOP_POSTER = "/media/gia-cinematic-desktop-poster.jpg";
 const MOBILE_VIDEO = "/media/gia-cinematic-mobile.mp4";
 const MOBILE_POSTER = "/media/gia-cinematic-mobile-poster.jpg";
 
-const stageDescriptions = {
-  en: [
-    "Understand the business before choosing the channel.",
-    "Connect the right channels to a clear strategy.",
-    "Turn attention into qualified opportunities.",
-    "Capture and manage every opportunity systematically.",
-    "Improve the journey from opportunity to customer.",
-    "Build a stronger foundation for sustainable growth.",
-  ],
-  ar: [
-    "فهم العمل قبل اختيار القناة.",
-    "ربط القنوات المناسبة باستراتيجية واضحة.",
-    "تحويل الاهتمام إلى فرص مؤهلة.",
-    "التقاط كل فرصة وإدارتها بطريقة منهجية.",
-    "تحسين الرحلة من الفرصة إلى العميل.",
-    "بناء أساس أقوى لنمو مستدام.",
-  ],
-} as const;
-
+/**
+ * The homepage's "first major visual moment" (Phase 7 priority #1).
+ * Backed by the real, approved cinematic video asset (a day-to-night
+ * waterfront skyline with the GIA mark resolving in) — scroll-scrubbed
+ * on desktop via ScrollDrivenVideo, synced to the same scrollYProgress
+ * already driving the stage labels/ring/rail so the video timeline and
+ * the text progression move together.
+ *
+ * Phase 7D fix: the video is never hidden via display:none while
+ * waiting for a readiness event — see ScrollDrivenVideo.tsx for the
+ * corrected poster-always-underneath, opacity-fade-in model. The scrim
+ * over the video was also reduced from 55% to 40% (both here and on
+ * the reduced-motion static state below) so the video itself stays
+ * clearly visible, not just present.
+ *
+ * Desktop: a compact (2.2x viewport) scroll-through with a pinned
+ * inner panel — enough scroll room for six stages to read as a
+ * deliberate progression without inflating total homepage length the
+ * way a 4–5x-viewport version would. This does not hijack scroll: the
+ * user's own scrolling is the only input, and normal page scroll
+ * continues immediately once the pinned panel's range is exhausted.
+ *
+ * Mobile: NOT pinned, NOT scroll-scrubbed (scroll-scrubbing video is
+ * CPU-costly and unreliable on mobile). The full six-stage narrative
+ * is retained (Strategy → Marketing → Leads → CRM → Conversion →
+ * Growth), presented as a lightweight sequential vertical reveal. The
+ * real mobile-optimized video plays as a simple, contained
+ * muted+playsInline autoplay loop behind the first stage only (a
+ * well-supported mobile pattern, distinct from scroll-scrubbing) —
+ * bounded to one ~40vh block rather than stretched across all six
+ * stacked blocks, which would visibly distort a single image/video at
+ * that aspect ratio. If the mobile video errors, it falls back to the
+ * poster image rather than risking a blank area. Reduced motion always
+ * shows the poster frame only — no autoplay, no motion.
+ */
 export function CinematicSystemSection({
   stages,
   arabic,
@@ -36,197 +58,258 @@ export function CinematicSystemSection({
   arabic: boolean;
 }) {
   return (
-    <section className="bg-surface py-16 sm:py-20 lg:py-28" aria-labelledby="gia-cinematic-heading">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-end justify-between gap-8 lg:mb-12">
-          <div className={arabic ? "text-right" : "text-left"} dir={arabic ? "rtl" : "ltr"}>
-            <p className="font-heading text-[10px] uppercase tracking-[0.28em] text-gold">
-              GIA / DIGITAL MARKETING ADVISORY
-            </p>
-            <h2 id="gia-cinematic-heading" className={`mt-3 max-w-3xl text-2xl font-semibold tracking-[-0.035em] text-ink sm:text-3xl lg:text-4xl ${arabic ? "font-heading-ar" : "font-heading"}`}>
-              {arabic ? "من الاستراتيجية إلى النمو — كنظام واحد مترابط." : "From strategy to growth — as one connected system."}
-            </h2>
-          </div>
-          <p className="hidden max-w-xs text-right text-xs leading-5 text-muted lg:block" dir={arabic ? "rtl" : "ltr"}>
-            {arabic ? "مرّر لاكتشاف كيف تتصل كل مرحلة بالتي تليها." : "Scroll to see how each stage connects to the next."}
-          </p>
-        </div>
-
-        <DesktopExperience stages={stages} arabic={arabic} />
-        <MobileExperience stages={stages} arabic={arabic} />
-      </div>
+    <section className="bg-ink">
+      <ol className="sr-only">
+        {stages.map((s) => (
+          <li key={s}>{s}</li>
+        ))}
+      </ol>
+      <DesktopCinematic stages={stages} arabic={arabic} />
+      <MobileCinematic stages={stages} arabic={arabic} />
     </section>
   );
 }
 
-function DesktopExperience({ stages, arabic }: { stages: string[]; arabic: boolean }) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const activeIndex = useActiveStage(scrollYProgress, stages.length);
-  const descriptions = arabic ? stageDescriptions.ar : stageDescriptions.en;
-
-  return (
-    <div ref={sectionRef} className="relative hidden lg:block">
-      <div className="relative min-h-[145vh]">
-        <div className="sticky top-20 grid min-h-[72vh] grid-cols-[minmax(260px,0.72fr)_minmax(0,1.55fr)] items-center gap-12 xl:gap-16">
-          <div className={arabic ? "order-2 text-right" : "order-1 text-left"} dir={arabic ? "rtl" : "ltr"}>
-            <div className="mb-8 flex items-center gap-4">
-              <span className="h-px w-10 bg-gold" />
-              <span className="font-heading text-[10px] uppercase tracking-[0.25em] text-muted">
-                {arabic ? "رحلة النمو" : "Growth journey"}
-              </span>
-            </div>
-
-            <div className="space-y-0">
-              {stages.map((stage, index) => {
-                const active = index === activeIndex;
-                return (
-                  <div
-                    key={`${stage}-${index}`}
-                    className={`relative border-b border-border py-4 transition-all duration-300 ${active ? "opacity-100" : "opacity-45"}`}
-                  >
-                    <div className="flex items-start gap-4">
-                      <span className={`mt-1 shrink-0 font-heading text-[10px] tracking-[0.18em] ${active ? "text-gold" : "text-muted"}`}>
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <div className="min-w-0">
-                        <p className={`text-xl font-semibold tracking-[-0.025em] ${active ? "text-ink" : "text-ink/70"} ${arabic ? "font-heading-ar" : "font-heading"}`}>
-                          {stage}
-                        </p>
-                        <motion.p
-                          initial={false}
-                          animate={{ height: active ? "auto" : 0, opacity: active ? 1 : 0, marginTop: active ? 6 : 0 }}
-                          className={`overflow-hidden text-xs leading-5 text-muted ${arabic ? "font-heading-ar" : "font-body"}`}
-                        >
-                          {descriptions[index]}
-                        </motion.p>
-                      </div>
-                    </div>
-                    <motion.div
-                      initial={false}
-                      animate={{ scaleX: active ? 1 : 0 }}
-                      transition={{ duration: reduceMotion ? 0 : 0.35 }}
-                      style={{ transformOrigin: arabic ? "right" : "left" }}
-                      className="absolute bottom-[-1px] h-px w-16 bg-gold"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="mt-7 flex items-center justify-between text-[9px] uppercase tracking-[0.2em] text-muted">
-              <span>{String(activeIndex + 1).padStart(2, "0")} / {String(stages.length).padStart(2, "0")}</span>
-              <span>{arabic ? "مرّر للأسفل" : "Keep scrolling"}</span>
-            </div>
-          </div>
-
-          <div className={arabic ? "order-1" : "order-2"}>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[12px] bg-ink shadow-[0_28px_80px_rgba(0,0,0,0.13)]">
-              <ScrollDrivenVideo
-                src={DESKTOP_VIDEO}
-                poster={DESKTOP_POSTER}
-                progress={scrollYProgress}
-                className="absolute inset-0"
-                reduceMotion={reduceMotion}
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-5 sm:p-7" dir={arabic ? "rtl" : "ltr"}>
-                <span className="font-heading text-[9px] uppercase tracking-[0.24em] text-white/65">GIA</span>
-                <span className="font-heading text-[9px] tracking-[0.2em] text-white/60">{String(activeIndex + 1).padStart(2, "0")}</span>
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-7" dir={arabic ? "rtl" : "ltr"}>
-                <motion.p
-                  key={activeIndex}
-                  initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.3 }}
-                  className={`text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl ${arabic ? "font-heading-ar" : "font-heading"}`}
-                >
-                  {stages[activeIndex]}
-                </motion.p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MobileExperience({ stages, arabic }: { stages: string[]; arabic: boolean }) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const activeIndex = useActiveStage(scrollYProgress, stages.length);
-  const descriptions = arabic ? stageDescriptions.ar : stageDescriptions.en;
-
-  return (
-    <div ref={sectionRef} className="lg:hidden" dir={arabic ? "rtl" : "ltr"}>
-      <div className="relative mb-7 overflow-hidden rounded-[12px] bg-ink shadow-[0_22px_60px_rgba(0,0,0,0.12)]">
-        <div className="relative aspect-[9/14] max-h-[620px] min-h-[430px]">
-          <div className="absolute inset-0">
-            <ScrollDrivenVideo
-              src={MOBILE_VIDEO}
-              poster={MOBILE_POSTER}
-              progress={scrollYProgress}
-              className="absolute inset-0"
-              reduceMotion={reduceMotion}
-            />
-          </div>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-5" dir={arabic ? "rtl" : "ltr"}>
-            <span className="font-heading text-[9px] uppercase tracking-[0.24em] text-white/65">GIA / DIGITAL MARKETING ADVISORY</span>
-            <span className="font-heading text-[9px] tracking-[0.2em] text-white/60">{String(activeIndex + 1).padStart(2, "0")}</span>
-          </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6">
-            <motion.p
-              key={activeIndex}
-              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.3 }}
-              className={`text-3xl font-semibold tracking-[-0.03em] text-white ${arabic ? "font-heading-ar" : "font-heading"}`}
-            >
-              {stages[activeIndex]}
-            </motion.p>
-          </div>
-        </div>
-      </div>
-
-      <div className="border-t border-border">
-        {stages.map((stage, index) => {
-          const active = index === activeIndex;
-          return (
-            <div key={`${stage}-${index}`} className={`relative border-b border-border py-4 transition-opacity duration-300 ${active ? "opacity-100" : "opacity-45"}`}>
-              <div className="flex items-start gap-4">
-                <span className={`mt-1 shrink-0 font-heading text-[10px] tracking-[0.18em] ${active ? "text-gold" : "text-muted"}`}>
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div className="min-w-0">
-                  <p className={`text-lg font-semibold tracking-[-0.02em] ${active ? "text-ink" : "text-ink/70"} ${arabic ? "font-heading-ar" : "font-heading"}`}>
-                    {stage}
-                  </p>
-                  <p className={`mt-1 text-xs leading-5 text-muted ${active ? "block" : "hidden"} ${arabic ? "font-heading-ar" : "font-body"}`}>
-                    {descriptions[index]}
-                  </p>
-                </div>
-              </div>
-              {active && <div className={`absolute bottom-[-1px] h-px w-12 bg-gold ${arabic ? "right-0" : "left-0"}`} />}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function useActiveStage(progress: MotionValue<number>, count: number) {
-  const [active, setActive] = useState(0);
-
-  useMotionValueEvent(progress, "change", (value) => {
-    const next = Math.min(count - 1, Math.max(0, Math.floor(value * count)));
-    setActive((current) => (current === next ? current : next));
+function DesktopCinematic({ stages, arabic }: { stages: string[]; arabic: boolean }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
   });
 
-  return active;
+  if (shouldReduceMotion) {
+    // Static resting state: the video's own poster frame (the resolved
+    // GIA mark over the skyline) plus the final stage of the journey
+    // (Growth) as the settled outcome — no scroll-linked motion, no
+    // video playback at all.
+    return (
+      <div className="relative hidden overflow-hidden lg:flex lg:h-[70vh] lg:items-center lg:justify-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={DESKTOP_POSTER}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-ink/40" />
+        <span
+          className={`relative text-5xl text-surface xl:text-7xl ${
+            arabic ? "font-heading-ar" : "font-heading"
+          }`}
+        >
+          {stages[stages.length - 1]}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div ref={containerRef} className="relative hidden lg:block lg:h-[220vh]">
+      <div className="sticky top-16 flex h-[calc(100vh-4rem)] items-center justify-center overflow-hidden lg:top-20 lg:h-[calc(100vh-5rem)]">
+        <ScrollDrivenVideo
+          src={DESKTOP_VIDEO}
+          poster={DESKTOP_POSTER}
+          progress={scrollYProgress}
+          className="absolute inset-0"
+        />
+        {/* Scrim: reduced from the earlier 55% — the video should
+            remain clearly visible; this is just enough to keep the
+            white stage-label text legible across the brighter frames
+            (city lights, sky), not to darken the video into the
+            background. */}
+        <div className="absolute inset-0 bg-ink/40" />
+        <RotatingRing progress={scrollYProgress} />
+        <ProgressRail count={stages.length} progress={scrollYProgress} />
+        {stages.map((stage, i) => (
+          <StageLabel
+            key={stage}
+            label={stage}
+            index={i}
+            count={stages.length}
+            progress={scrollYProgress}
+            arabic={arabic}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function StageLabel({
+  label,
+  index,
+  count,
+  progress,
+  arabic,
+}: {
+  label: string;
+  index: number;
+  count: number;
+  progress: MotionValue<number>;
+  arabic: boolean;
+}) {
+  const segment = 1 / count;
+  const start = index * segment;
+  const end = start + segment;
+  const blend = segment * 0.35;
+
+  const opacity = useTransform(
+    progress,
+    [
+      Math.max(0, start - blend),
+      start,
+      end - blend,
+      Math.min(1, end),
+    ],
+    [0, 1, 1, 0],
+  );
+  const y = useTransform(progress, [start, end], [16, -16]);
+
+  return (
+    <motion.div
+      style={{ opacity, y }}
+      className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center"
+    >
+      <span className="font-heading text-sm text-gold">{String(index + 1).padStart(2, "0")}</span>
+      <span
+        className={`text-4xl text-surface sm:text-5xl xl:text-7xl ${
+          arabic ? "font-heading-ar leading-snug" : "font-heading leading-tight"
+        }`}
+      >
+        {label}
+      </span>
+    </motion.div>
+  );
+}
+
+function RotatingRing({ progress }: { progress: MotionValue<number> }) {
+  const rotate = useTransform(progress, [0, 1], [0, 60]);
+  const scale = useTransform(progress, [0, 0.5, 1], [0.9, 1.05, 0.9]);
+  return (
+    <motion.svg
+      aria-hidden="true"
+      viewBox="0 0 400 400"
+      style={{ rotate, scale }}
+      className="pointer-events-none absolute left-1/2 top-1/2 h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 text-surface/10"
+    >
+      <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="1" fill="none" />
+      <circle cx="200" cy="200" r="140" stroke="currentColor" strokeWidth="1" fill="none" className="text-gold/20" />
+    </motion.svg>
+  );
+}
+
+function ProgressRail({
+  count,
+  progress,
+}: {
+  count: number;
+  progress: MotionValue<number>;
+}) {
+  return (
+    <div className="absolute start-8 top-1/2 flex -translate-y-1/2 flex-col gap-3">
+      {Array.from({ length: count }).map((_, i) => (
+        <RailTick key={i} index={i} count={count} progress={progress} />
+      ))}
+    </div>
+  );
+}
+
+function RailTick({
+  index,
+  count,
+  progress,
+}: {
+  index: number;
+  count: number;
+  progress: MotionValue<number>;
+}) {
+  const segment = 1 / count;
+  const start = index * segment;
+  const end = start + segment;
+  const opacity = useTransform(progress, [start, start + segment * 0.3], [0.25, 1]);
+  const scaleY = useTransform(progress, [start, end], [1, 1.6]);
+
+  return (
+    <motion.span
+      aria-hidden="true"
+      style={{ opacity, scaleY }}
+      className="h-4 w-px bg-surface"
+    />
+  );
+}
+
+function MobileCinematic({ stages, arabic }: { stages: string[]; arabic: boolean }) {
+  return (
+    <div className="flex flex-col lg:hidden">
+      {stages.map((stage, i) => (
+        <MobileStage key={stage} label={stage} index={i} arabic={arabic} />
+      ))}
+    </div>
+  );
+}
+
+function MobileStage({ label, index, arabic }: { label: string; index: number; arabic: boolean }) {
+  const shouldReduceMotion = useReducedMotion();
+  const [mobileVideoErrored, setMobileVideoErrored] = useState(false);
+  const isLast = index === 5;
+  const isFirst = index === 0;
+  const showMobileVideo = isFirst && !shouldReduceMotion && !mobileVideoErrored;
+  const showMobilePoster = isFirst && (shouldReduceMotion || mobileVideoErrored);
+
+  const content = (
+    <div className="relative flex min-h-[40vh] flex-col items-center justify-center gap-4 overflow-hidden border-t border-surface/10 px-6 py-10 text-center first:border-t-0">
+      {isFirst && (
+        <>
+          {showMobilePoster && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={MOBILE_POSTER}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          )}
+          {showMobileVideo && (
+            <video
+              src={MOBILE_VIDEO}
+              poster={MOBILE_POSTER}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              aria-hidden="true"
+              onError={() => setMobileVideoErrored(true)}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          )}
+          {/* Reduced from the earlier 55%, matching the desktop scrim —
+              the mobile video should remain clearly visible too. */}
+          <div className="absolute inset-0 bg-ink/40" />
+        </>
+      )}
+      <span className="relative font-heading text-sm text-gold">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <span
+        className={`relative text-3xl text-surface sm:text-4xl ${
+          arabic ? "font-heading-ar leading-snug" : "font-heading leading-tight"
+        } ${isLast ? "text-gold" : ""}`}
+      >
+        {label}
+      </span>
+    </div>
+  );
+
+  if (shouldReduceMotion) return content;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      {content}
+    </motion.div>
+  );
 }
