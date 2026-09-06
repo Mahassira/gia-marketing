@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Section } from "@/components/layout/Section";
 import { IndustriesGrid } from "@/components/sections/IndustriesGrid";
+import { PageVideoBanner } from "@/components/motion/PageVideoBanner";
 
 export async function generateMetadata({
   params,
@@ -52,6 +53,16 @@ export default async function IndustriesPage({
           { name: tNav("industries"), url: `${siteUrl}/${locale}/industries` },
         ])}
       />
+
+      <div className="relative h-[45vh] min-h-[320px] sm:h-[50vh] lg:h-[55vh]">
+        <PageVideoBanner
+          desktopVideo="/media/industries-desktop.mp4"
+          desktopPoster="/media/industries-desktop-poster.jpg"
+          mobileVideo="/media/industries-mobile.mp4"
+          mobilePoster="/media/industries-mobile-poster.jpg"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/20" />
+      </div>
 
       <Section tone="light">
         <Breadcrumbs items={breadcrumbItems} />

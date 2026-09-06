@@ -12,6 +12,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Section } from "@/components/layout/Section";
 import { ServicesPillars } from "@/components/sections/ServicesPillars";
+import { PageVideoBanner } from "@/components/motion/PageVideoBanner";
 
 export async function generateMetadata({
   params,
@@ -59,6 +60,16 @@ export default async function ServicesPage({
           { name: tNav("services"), url: `${siteUrl}/${locale}/services` },
         ])}
       />
+
+      <div className="relative h-[45vh] min-h-[320px] sm:h-[50vh] lg:h-[55vh]">
+        <PageVideoBanner
+          desktopVideo="/media/services-atmosphere.mp4"
+          desktopPoster="/media/services-atmosphere-poster.jpg"
+          mobileVideo="/media/services-atmosphere.mp4"
+          mobilePoster="/media/services-atmosphere-poster.jpg"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/20" />
+      </div>
 
       <Section tone="light">
         <Breadcrumbs items={breadcrumbItems} />

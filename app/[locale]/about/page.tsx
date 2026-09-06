@@ -9,6 +9,7 @@ import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PrinciplesGrid } from "@/components/sections/PrinciplesGrid";
 import { Button } from "@/components/ui/Button";
+import { PageVideoBanner } from "@/components/motion/PageVideoBanner";
 
 export async function generateMetadata({
   params,
@@ -53,6 +54,16 @@ export default async function AboutPage({
           { name: tNav("about"), url: `${siteUrl}/${locale}/about` },
         ])}
       />
+
+      <div className="relative h-[45vh] min-h-[320px] sm:h-[50vh] lg:h-[55vh]">
+        <PageVideoBanner
+          desktopVideo="/media/about-desktop.mp4"
+          desktopPoster="/media/about-desktop-poster.jpg"
+          mobileVideo="/media/about-mobile.mp4"
+          mobilePoster="/media/about-mobile-poster.jpg"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/20" />
+      </div>
 
       <Section tone="light">
         <Breadcrumbs items={breadcrumbItems} />
